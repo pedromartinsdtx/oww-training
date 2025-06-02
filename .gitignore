@@ -3,3 +3,4 @@ audios/logs
 *.pyc
 __pycache__/
 .env
+*.onnx
