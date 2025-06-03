@@ -1,4 +1,4 @@
-22# Simple Piper ONNX Generator Usage
+# Simple Piper ONNX Generator Usage
 
 This script provides a simplified way to generate speech samples using Piper ONNX models.
 
@@ -37,8 +37,8 @@ Using models from the piper-sample-generator directory:
 ```bash
 # Generate 20 samples with Portuguese models
 python piper_gen.py \
-    --models ../piper-sample-generator/models/pt_PT-tugao-medium.onnx \
-             ../piper-sample-generator/models/pt_PT-rita.onnx \
+    --models models/pt_PT-tugao-medium.onnx \
+             models/pt_PT-rita.onnx \
     --texts "Olá mundo" "Como estás hoje?" "Este é um teste" "Boa tarde" \
     --num-samples 20 \
     --output-dir ./portuguese_samples
