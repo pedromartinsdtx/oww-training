@@ -21,11 +21,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class SimplePiperGenerator:
+class PiperGenerator:
     def __init__(
         self,
         models: List[str],
-        output_dir: str,
         extra_models_paths: Optional[list[str | Path]] = None,
     ):
         self.models: List[str] = models
@@ -43,8 +42,6 @@ class SimplePiperGenerator:
             )
 
             self.voices.append(voice)
-
-        self.output_dir: str = output_dir
 
     def download_tugao_voice(self):
         url = "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx"
@@ -112,28 +109,29 @@ class SimplePiperGenerator:
     def generate_samples_piper(
         self,
         texts: List[str],
-        num_samples: int,
+        max_samples: int,
+        output_dir: str,
         length_scale: Optional[float] = None,
         noise_scale: Optional[float] = None,
         noise_w: Optional[float] = None,
     ):
         # Create output directory if it doesn't exist
-        Path(self.output_dir).mkdir(parents=True, exist_ok=True)
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-        for i in range(num_samples):
+        for i in range(max_samples):
             voice = random.choice(self.voices)
             text = random.choice(texts)
 
             # Controls the duration of the generated speech (larger = slower/longer)
             length_scale = length_scale or round(random.triangular(0.5, 2, 1.0), 3)
-            
+
             # Controls the amount of randomness/noise in generation (affects prosody)
             noise_scale = noise_scale or round(random.triangular(0.3, 1.2, 0.667), 3)
 
             # Controls pitch/energy variation (often for expressive TTS)
             noise_w = noise_w or round(random.triangular(0.3, 1.5, 0.8), 3)
 
-            logger.info(f"Generating sample {i + 1}/{num_samples} for text: {text}")
+            logger.info(f"Generating sample {i + 1}/{max_samples} for text: {text}")
             synthesize_args = {
                 "length_scale": length_scale,
                 "noise_scale": noise_scale,
@@ -142,7 +140,7 @@ class SimplePiperGenerator:
 
             # Save audio to file
             wav_path = (
-                Path(self.output_dir)
+                Path(output_dir)
                 / f"{str(voice.config.espeak_voice)}_{text}_{time.monotonic_ns()}.wav"
             )
             with wave.open(str(wav_path), "wb") as wav_file:
@@ -199,7 +197,7 @@ def main():
         logger.info(f"Using {len(texts)} provided texts")
 
     # Create generator and generate samples
-    generator = SimplePiperGenerator(
+    generator = PiperGenerator(
         args.models, args.output_dir, extra_models_paths=extra_models
     )
     generator.generate_samples_piper(

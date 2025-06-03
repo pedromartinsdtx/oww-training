@@ -2,3 +2,4 @@ google-genai
 pydub
 audioop-lts
 python-dotenv
+piper-tts
