@@ -109,31 +109,32 @@ class SimplePiperGenerator:
 
         return loaded_voices
 
-    def generate_samples(
+    def generate_samples_piper(
         self,
         texts: List[str],
         num_samples: int,
+        length_scale: Optional[float] = None,
+        noise_scale: Optional[float] = None,
+        noise_w: Optional[float] = None,
     ):
         # Create output directory if it doesn't exist
         Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
         for i in range(num_samples):
             voice = random.choice(self.voices)
-            # speaker_id = voice.speaker_id  # Get speaker ID if needed (for multi-speaker models)
             text = random.choice(texts)
-            length_scale = round(
-                random.triangular(0.5, 2, 1.0), 3
-            )  # Controls the duration of the generated speech (larger = slower/longer)
-            noise_scale = round(
-                random.triangular(0.3, 1.2, 0.667), 3
-            )  # Controls the amount of randomness/noise in generation (affects prosody)
-            noise_w = round(
-                random.triangular(0.3, 1.5, 0.8), 3
-            )  # Controls pitch/energy variation (often for expressive TTS)
+
+            # Controls the duration of the generated speech (larger = slower/longer)
+            length_scale = length_scale or round(random.triangular(0.5, 2, 1.0), 3)
+            
+            # Controls the amount of randomness/noise in generation (affects prosody)
+            noise_scale = noise_scale or round(random.triangular(0.3, 1.2, 0.667), 3)
+
+            # Controls pitch/energy variation (often for expressive TTS)
+            noise_w = noise_w or round(random.triangular(0.3, 1.5, 0.8), 3)
 
             logger.info(f"Generating sample {i + 1}/{num_samples} for text: {text}")
             synthesize_args = {
-                # "speaker_id": speaker, # Specifies which speaker's voice to synthesize (multi-speaker models)
                 "length_scale": length_scale,
                 "noise_scale": noise_scale,
                 "noise_w": noise_w,
@@ -151,9 +152,6 @@ class SimplePiperGenerator:
 def main():
     parser = argparse.ArgumentParser(description="Simple Piper ONNX Sample Generator")
 
-    # parser.add_argument(
-    #     "--models", nargs="+", required=True, help="Paths to Piper ONNX model files"
-    # )
     parser.add_argument(
         "--texts",
         nargs="+",
@@ -204,7 +202,7 @@ def main():
     generator = SimplePiperGenerator(
         args.models, args.output_dir, extra_models_paths=extra_models
     )
-    generator.generate_samples(
+    generator.generate_samples_piper(
         texts,
         args.num_samples,
     )
