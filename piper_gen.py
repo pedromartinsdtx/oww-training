@@ -1,12 +1,20 @@
 import argparse
 import logging
+import os
 import random
 import time
 import wave
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
+import requests
 import torch
+from piper.download import (
+    VoiceNotFoundError,
+    ensure_voice_exists,
+    find_voice,
+    get_voices,
+)
 from piper.voice import PiperVoice
 
 logging.basicConfig(level=logging.INFO)
@@ -14,22 +22,92 @@ logger = logging.getLogger(__name__)
 
 
 class SimplePiperGenerator:
-    def __init__(self, models: List[str], output_dir: str):
+    def __init__(
+        self,
+        models: List[str],
+        output_dir: str,
+        extra_models_paths: Optional[list[str | Path]] = None,
+    ):
         self.models: List[str] = models
-        self.voices: List[PiperVoice] = []
 
-        use_cuda = torch.cuda.is_available()
+        self.voices: List[PiperVoice] = self.ensure_voices_exist_and_download(
+            self.models
+        )
 
-        for model_path in self.models:
-            # Generate audio using Piper ONNX model
+        # Carregar mais vozes extra a partir dos próprios modelos.
+        for extra_model in extra_models_paths:
             voice = PiperVoice.load(
-                model_path=model_path,
-                config_path=model_path + ".json",
-                use_cuda=use_cuda,
-            )  # If possible always use cuda. Dont know if it slows down things if a GPU isn't available
+                model_path=extra_model,
+                config_path=extra_model + ".json",
+                use_cuda=torch.cuda.is_available(),
+            )
+
             self.voices.append(voice)
 
         self.output_dir: str = output_dir
+
+    def download_tugao_voice(self):
+        url = "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx"
+
+        filename = url.split("/")[-1]
+
+        # Destination directory and file path
+        destination_dir = "models"
+        Path(destination_dir).mkdir(parents=True, exist_ok=True)
+        file_path = os.path.join(destination_dir, filename)
+
+        # Check if file already exists
+        if os.path.exists(file_path):
+            print(f"✓ {filename} already exists, skipping download")
+            return
+
+        print(f"Downloading from: {url}")
+
+        # Download and save the file
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error if download fails
+
+        print(f"Saving to: {file_path}")
+        with open(file_path, "wb") as f:
+            f.write(response.content)
+
+        print(f"✓ Successfully downloaded {filename}")
+
+    def ensure_voices_exist_and_download(self, models: List[str]) -> List[PiperVoice]:
+        # Download manual do modelo de voz do tugao para ultrapassar problemas de encodign da funcao de download da libraria.
+        self.download_tugao_voice()
+
+        download_dir = Path("models")
+        download_dir.mkdir(parents=True, exist_ok=True)
+
+        voices_info = get_voices(download_dir, update_voices=False)
+
+        loaded_voices = []
+
+        # Loop through each model and download if missing/incomplete
+        for model_name in models:
+            try:
+                print(f"Ensuring voice exists: {model_name}")
+                ensure_voice_exists(
+                    model_name, [download_dir], download_dir, voices_info
+                )
+                print(f"✓ Voice '{model_name}' is ready.")
+
+                model_path, config_path = find_voice(model_name, [download_dir])
+                voice = PiperVoice.load(
+                    model_path=model_path,
+                    config_path=config_path,
+                    use_cuda=torch.cuda.is_available(),
+                )
+
+                loaded_voices.append(voice)
+
+            except VoiceNotFoundError:
+                print(f"✗ Voice '{model_name}' not found in voices.json.")
+            except Exception as e:
+                print(f"⚠️ Error with voice '{model_name}': {e}")
+
+        return loaded_voices
 
     def generate_samples(
         self,
@@ -73,9 +151,9 @@ class SimplePiperGenerator:
 def main():
     parser = argparse.ArgumentParser(description="Simple Piper ONNX Sample Generator")
 
-    parser.add_argument(
-        "--models", nargs="+", required=True, help="Paths to Piper ONNX model files"
-    )
+    # parser.add_argument(
+    #     "--models", nargs="+", required=True, help="Paths to Piper ONNX model files"
+    # )
     parser.add_argument(
         "--texts",
         nargs="+",
@@ -93,6 +171,26 @@ def main():
 
     args = parser.parse_args()
 
+    args.models = [
+        "pt_PT-tugão-medium",
+        "es_ES-carlfm-x_low",
+        "es_ES-davefx-medium",
+        "es_ES-sharvard-medium",
+        "es_MX-ald-medium",
+        "es_MX-claude-high",
+        "it_IT-paola-medium",
+        "pt_BR-cadu-medium",
+        "pt_BR-faber-medium",
+        "pt_BR-jeff-medium",
+        "ro_RO-mihai-medium",
+        # "sl_SI-artur-medium",
+    ]
+
+    extra_models = [
+        "models/pt_PT-rita.onnx",
+        "models/pt_PT-tugão-medium.onnx",
+    ]
+
     # Validate inputs
     if not args.texts:
         parser.error("--texts must be provided")
@@ -103,7 +201,9 @@ def main():
         logger.info(f"Using {len(texts)} provided texts")
 
     # Create generator and generate samples
-    generator = SimplePiperGenerator(args.models, args.output_dir)
+    generator = SimplePiperGenerator(
+        args.models, args.output_dir, extra_models_paths=extra_models
+    )
     generator.generate_samples(
         texts,
         args.num_samples,
