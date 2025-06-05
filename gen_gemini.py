@@ -314,7 +314,7 @@ def gemini_loop(iterations: int = 20, play_audio: bool = False):
 if __name__ == "__main__":
     """
     python3 -m services.gemini
-    python3 gemini_gen.py --play-audio
+    python3 gen_gemini.py --play-audio
     """
 
     parser = argparse.ArgumentParser(

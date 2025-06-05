@@ -1,7 +1,7 @@
 import threading
 
-from edge_gen import generate_edge_tts_voice_loop
-from gemini_gen import gemini_loop
+from gen_edge import generate_edge_tts_voice_loop
+from gen_gemini import gemini_loop
 
 
 def main():

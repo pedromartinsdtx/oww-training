@@ -4,3 +4,4 @@ audios/logs
 __pycache__/
 .env
 *.onnx
+*.tflite

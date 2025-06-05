@@ -8,7 +8,7 @@ import edge_tts
 
 from utils.audio_files import mp3_to_wav
 from utils.play_audio import play_audio_file
-from remove_silence import remove_silence_from_file
+from utils.remove_silence import remove_silence_from_file
 
 warnings.filterwarnings("ignore", category=RuntimeWarning, module="asyncio")
 
