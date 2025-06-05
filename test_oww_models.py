@@ -69,8 +69,8 @@ for file_path, segment_scores_list in results.items():
 
 print("\n--- Final Report ---")
 print(f"Total Files Processed: {total_files_processed}")
-print(f"Total Files Activated: {total_files_activated}")
-print(f"Total Files Not Activated: {total_files_processed - total_files_activated}")
+print(f"Total Files Activated: {total_files_activated} ({(total_files_activated / total_files_processed) * 100:.2f}%)")
+print(f"Total Files Not Activated: {total_files_processed - total_files_activated} ({((total_files_processed - total_files_activated) / total_files_processed) * 100:.2f}%)")
 print("\nModel Activation Counts (files activated by each model):")
 for model_name, count in model_activation_counts.items():
     print(f"  {model_name}: {count}")
