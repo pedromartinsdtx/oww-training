@@ -49,34 +49,29 @@ class PiperGenerator:
             self.voices.append(voice)
 
     def download_tugao_voice(self):
-        url = "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx"
+        base_url = "https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/"
+        filenames = ["pt_PT-tugão-medium.onnx", "pt_PT-tugão-medium.onnx.json"]
 
-        filename = url.split("/")[-1]
-
-        # Destination directory and file path
         destination_dir = "models"
         Path(destination_dir).mkdir(parents=True, exist_ok=True)
-        file_path = os.path.join(destination_dir, filename)
 
-        # Check if file already exists
-        if os.path.exists(file_path):
-            print(f"✓ {filename} already exists, skipping download")
-            return
+        for filename in filenames:
+            file_path = os.path.join(destination_dir, filename)
+            url = base_url + filename
 
-        print(f"Downloading from: {url}")
-
-        # Download and save the file
-        response = requests.get(url)
-        response.raise_for_status()  # Raise an error if download fails
-
-        print(f"Saving to: {file_path}")
-        with open(file_path, "wb") as f:
-            f.write(response.content)
-
-        print(f"✓ Successfully downloaded {filename}")
+            if not os.path.exists(file_path):
+                print(f"Downloading from: {url}")
+                response = requests.get(url)
+                response.raise_for_status()
+                print(f"Saving to: {file_path}")
+                with open(file_path, "wb") as f:
+                    f.write(response.content)
+                print(f"✓ Successfully downloaded {filename}")
+            else:
+                print(f"✓ {filename} already exists, skipping download")
 
     def ensure_voices_exist_and_download(self, models: List[str]) -> List[PiperVoice]:
-        # Download manual do modelo de voz do tugao para ultrapassar problemas de encodign da funcao de download da libraria.
+        # Download manual do modelo de voz do tugao para ultrapassar problemas de encoding da funcao de download da libraria.
         self.download_tugao_voice()
 
         download_dir = Path("models")
@@ -146,16 +141,16 @@ class PiperGenerator:
 
             # Controls the duration of the generated speech (larger = slower/longer)
             current_length_scale = length_scale or round(
-                random.triangular(0.5, 2, 1.0), 3
+                random.triangular(0.6, 1.8, 1.0), 3
             )
 
             # Controls the amount of randomness/noise in generation (affects prosody)
             current_noise_scale = noise_scale or round(
-                random.triangular(0.3, 1.2, 0.667), 3
+                random.triangular(0.4, 1, 0.667), 3
             )
 
             # Controls pitch/energy variation (often for expressive TTS)
-            current_noise_w = noise_w or round(random.triangular(0.3, 1.5, 0.8), 3)
+            current_noise_w = noise_w or round(random.triangular(0.5, 1.2, 0.8), 3)
 
             logger.info(f"Generating sample {i + 1}/{max_samples} for text: {text}")
             synthesize_args = {
@@ -214,23 +209,18 @@ def main():
 
     args = parser.parse_args()
 
+    # More info about voices in: https://piper.ttstool.com/
     args.models = [
         "pt_PT-tugão-medium",
-        "es_ES-carlfm-x_low",
-        "es_ES-davefx-medium",
-        "es_ES-sharvard-medium",
-        "es_MX-ald-medium",
-        "es_MX-claude-high",
-        "it_IT-paola-medium",
-        "pt_BR-cadu-medium",
-        "pt_BR-faber-medium",
-        "pt_BR-jeff-medium",
-        "ro_RO-mihai-medium",
-        # "sl_SI-artur-medium",
+        # "es_MX-claude-high",
+        # "it_IT-paola-medium",
+        # "pt_BR-cadu-medium",
+        # "pt_BR-faber-medium",
+        # "ro_RO-mihai-medium",
     ]
 
     extra_models = [
-        # "models/pt_PT-rita.onnx",
+        "models/pt_PT-rita.onnx",
         # "models/pt_PT-tugão-medium.onnx",
     ]
 

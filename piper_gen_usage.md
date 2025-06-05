@@ -5,6 +5,9 @@ This script provides a simplified way to generate speech samples using Piper ONN
 ## Basic Usage
 
 ```bash
+# Automatically play and remove the sample after generation
+python piper_gen.py --texts "Clarisse" && play_all samples_generated/ && rm -rf samples_generated/
+
 # Generate 10 samples using a single model with text from command line
 python piper_gen.py \
     --models /path/to/model.onnx \
@@ -19,15 +22,6 @@ python piper_gen.py \
     --num-samples 50 \
     --output-dir ./output
 
-# Generate with custom parameters
-python piper_gen.py \
-    --models /path/to/model.onnx \
-    --texts "Hello" "World" \
-    --num-samples 20 \
-    --noise-scales 0.6 0.7 0.8 \
-    --length-scales 0.9 1.0 1.1 \
-    --noise-scale-ws 0.7 0.8 \
-    --output-dir ./custom_output
 ```
 
 ## Example with Available Models
