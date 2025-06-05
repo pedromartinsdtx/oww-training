@@ -3,25 +3,24 @@ import glob
 from openwakeword.model import Model
 from openwakeword.utils import bulk_predict
 
+WW_MODELS_FOLDER = "models-ww"
+ACTIVATION_THRESHOLD = 0.5
+
 model = Model()
 # model.predict_clip("path/to/wav/file")
 
 # folder_paths = ["samples/samples_edge_pt_augmented"]
-folder_paths = ["samples/gemini"]
+# folder_paths = ["samples/gemini"]
+folder_paths = ["samples"]
 
 file_paths = []
 for folder in folder_paths:
-    file_paths.extend(glob.glob(f"{folder}/*.wav"))
+    file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
 results = bulk_predict(
     file_paths=file_paths,
-    # wakeword_model_paths=[
-    wakeword_models=[
-        "models-ww/CLEDEESSS_v5.onnx",
-        "models-ww/CLEDEESSS_v6.onnx",
-        # "models-ww/CLEDEESSS_v7.tflite",
-    ],
-    ncpu=2,
+    wakeword_models=glob.glob(f"{WW_MODELS_FOLDER}/*.onnx"),
+    ncpu=6,
     inference_framework="onnx",
 )
 
@@ -44,7 +43,7 @@ for file_path, segment_scores_list in results.items():
             # Track max score for each model
             if model_name not in max_scores or score > max_scores[model_name]:
                 max_scores[model_name] = score
-            if score > 0.5:
+            if score > ACTIVATION_THRESHOLD:
                 activated_in_file = True
                 if (
                     model_name not in activation_details
