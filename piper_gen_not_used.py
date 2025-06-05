@@ -1,4 +1,5 @@
 import argparse
+import io
 import logging
 import os
 import random
@@ -6,13 +7,12 @@ import time
 import wave
 from pathlib import Path
 from typing import List, Optional
-import io
 
-import requests
-import torch
-import soundfile as sf
 import librosa
 import numpy as np
+import requests
+import soundfile as sf
+import torch
 from piper.download import (
     VoiceNotFoundError,
     ensure_voice_exists,
@@ -136,6 +136,7 @@ class PiperGenerator:
         resample_rate = 16000
 
         for i in tqdm(range(max_samples), desc="Generating samples"):
+            # for i in range(max_samples):
             voice = random.choice(self.voices)
             text = random.choice(texts)
 
