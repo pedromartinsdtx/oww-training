@@ -91,4 +91,5 @@ print(
 )
 print("\nModel Activation Counts (files activated by each model):")
 for model_name, count in model_activation_counts.items():
-    print(f"  {model_name}: {count}")
+    percentage = (count / total_files_processed) * 100
+    print(f"  {model_name}: {count} ({percentage:.2f}%)")
