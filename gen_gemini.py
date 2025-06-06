@@ -10,14 +10,31 @@ import random
 import struct
 import time
 from typing import Optional
+import librosa
 
 from dotenv import load_dotenv
 from google import genai
+import numpy as np
 from google.genai import types
 
 from utils.play_audio import play_audio_file
 
 load_dotenv()
+
+
+def _resample_audio(
+    self, audio_data: np.ndarray, original_samplerate: int, target_samplerate: int
+) -> np.ndarray:
+    """
+    Resamples audio data to the target sample rate.
+    """
+    if audio_data.ndim > 1 and audio_data.shape[1] == 1:
+        audio_data = audio_data[:, 0]  # Convert to mono if needed
+
+    resampled_audio = librosa.resample(
+        y=audio_data, orig_sr=original_samplerate, target_sr=target_samplerate
+    )
+    return resampled_audio
 
 
 def convert_bytes_to_wav(audio_data: bytes, mime_type: str) -> bytes:
@@ -207,6 +224,7 @@ def generate_gemini_voice(
     model: Optional[str] = "gemini-2.5-flash-preview-tts",
     voice: Optional[str] = None,
     temperature: Optional[float] = 1.0,
+    resample_to: Optional[int] = 16000,  # New argument for target sample rate
 ) -> str:
     # Arguments handling
     if voice is None:
@@ -264,6 +282,29 @@ def generate_gemini_voice(
                 data_buffer = convert_bytes_to_wav(
                     inline_data.data, inline_data.mime_type
                 )
+
+            # --- Resample audio here ---
+            # Try to load audio data as numpy array
+            import io
+            import soundfile as sf
+
+            audio_np, orig_sr = sf.read(io.BytesIO(data_buffer), dtype="float32")
+            # If mono, ensure shape is (N,)
+            if audio_np.ndim > 1 and audio_np.shape[1] == 1:
+                audio_np = audio_np[:, 0]
+
+            # Resample if needed
+            if resample_to and orig_sr != resample_to:
+                audio_np = _resample_audio(None, audio_np, orig_sr, resample_to)
+                # Save as WAV with new sample rate
+                import tempfile
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmpf:
+                    sf.write(tmpf.name, audio_np, resample_to)
+                    tmpf.seek(0)
+                    data_buffer = tmpf.read()
+                file_extension = ".wav"
+
             file_name = f"{BASE_OUTPUT_DIR}-{voice}-{time_id}{file_extension}"
             save_binary_file(file_name, data_buffer)
         else:

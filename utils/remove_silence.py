@@ -51,7 +51,7 @@ def remove_silence_from_file(input_path, output_path=None):
     return output_path
 
 
-def process_folder(folder_path, output_folder=None):
+def remove_silence_from_folder(folder_path, output_folder=None):
     """
     Process all audio files in a folder to remove silence.
 
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     elif os.path.isdir(args.path):
         # Process folder
         try:
-            processed_files = process_folder(args.path, args.output)
+            processed_files = remove_silence_from_folder(args.path, args.output)
             print(f"Processed {len(processed_files)} files successfully.")
         except Exception as e:
             print(f"Error processing folder: {str(e)}")

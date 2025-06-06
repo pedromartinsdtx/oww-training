@@ -11,15 +11,29 @@ model = Model()
 
 # folder_paths = ["samples/samples_edge_pt_augmented"]
 # folder_paths = ["samples/gemini"]
-folder_paths = ["samples"]
+audio_folder_paths = ["samples"]
 
-file_paths = []
-for folder in folder_paths:
-    file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
+audio_file_paths = []
+for folder in audio_folder_paths:
+    audio_file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
+# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
+wakeword_models_paths = [
+    # f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
+    f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
+    f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
+    f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
+]
+
+# Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
+# For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
+# increasing overall efficiency at the cost of detection latency
 results = bulk_predict(
-    file_paths=file_paths,
-    wakeword_models=glob.glob(f"{WW_MODELS_FOLDER}/*.onnx"),
+    file_paths=audio_file_paths,
+    wakeword_models=wakeword_models_paths,
     ncpu=6,
     inference_framework="onnx",
 )
@@ -69,8 +83,12 @@ for file_path, segment_scores_list in results.items():
 
 print("\n--- Final Report ---")
 print(f"Total Files Processed: {total_files_processed}")
-print(f"Total Files Activated: {total_files_activated} ({(total_files_activated / total_files_processed) * 100:.2f}%)")
-print(f"Total Files Not Activated: {total_files_processed - total_files_activated} ({((total_files_processed - total_files_activated) / total_files_processed) * 100:.2f}%)")
+print(
+    f"Total Files Activated: {total_files_activated} ({(total_files_activated / total_files_processed) * 100:.2f}%)"
+)
+print(
+    f"Total Files Not Activated: {total_files_processed - total_files_activated} ({((total_files_processed - total_files_activated) / total_files_processed) * 100:.2f}%)"
+)
 print("\nModel Activation Counts (files activated by each model):")
 for model_name, count in model_activation_counts.items():
     print(f"  {model_name}: {count}")
