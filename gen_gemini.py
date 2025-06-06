@@ -237,6 +237,7 @@ def generate_gemini_voice(
         ),
     )
 
+    file_name = None
     for chunk in client.models.generate_content_stream(
         model=model,
         contents=contents,
