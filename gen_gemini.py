@@ -2,7 +2,6 @@
 # pip install google-genai
 
 import argparse
-import array
 import json
 import mimetypes
 import os
@@ -77,60 +76,6 @@ def convert_bytes_to_wav(audio_data: bytes, mime_type: str) -> bytes:
     )
 
     return header + audio_data
-
-
-#! NOT TESTED
-def convert_to_wav_16khz(audio_data: bytes, mime_type: str) -> bytes:
-    """Converts raw audio data (24kHz) to WAV at 16kHz sample rate.
-
-    Args:
-        audio_data: The raw audio data as a bytes object.
-        mime_type: Mime type of the audio data.
-
-    Returns:
-        A bytes object representing the WAV file header + downsampled audio.
-    """
-    parameters = parse_audio_mime_type(mime_type)
-    bits_per_sample = parameters["bits_per_sample"]
-    orig_sample_rate = parameters["rate"]
-    num_channels = 1
-
-    if bits_per_sample != 16 or orig_sample_rate != 24000:
-        raise ValueError("Only supports 16-bit PCM at 24kHz input.")
-
-    # Convert bytes to array of signed 16-bit samples
-    samples = array.array("h")
-    samples.frombytes(audio_data)
-
-    # Downsample by simple decimation (drop 1 out of every 3 samples)
-    downsampled = samples[:: 3 // (24000 // 16000)]
-
-    # Convert back to bytes
-    downsampled_bytes = downsampled.tobytes()
-    data_size = len(downsampled_bytes)
-    bytes_per_sample = bits_per_sample // 8
-    block_align = num_channels * bytes_per_sample
-    byte_rate = 16000 * block_align
-    chunk_size = 36 + data_size
-
-    header = struct.pack(
-        "<4sI4s4sIHHIIHH4sI",
-        b"RIFF",
-        chunk_size,
-        b"WAVE",
-        b"fmt ",
-        16,
-        1,
-        num_channels,
-        16000,  # New sample rate
-        byte_rate,
-        block_align,
-        bits_per_sample,
-        b"data",
-        data_size,
-    )
-
-    return header + downsampled_bytes
 
 
 def parse_audio_mime_type(mime_type: str) -> dict[str, int | None]:

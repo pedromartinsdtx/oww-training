@@ -6,7 +6,7 @@ import warnings
 
 import edge_tts
 
-from utils.audio_files import mp3_to_wav
+from utils.audio_files import mp3_to_wav, resample_audio_file_to_16k
 from utils.play_audio import play_audio_file
 from utils.remove_silence import remove_silence_from_file
 
@@ -35,6 +35,12 @@ async def text_to_speech(
     )
 
     await communicate.save(filename)
+
+    # Convert MP3 to WAV and ensure 16kHz sample rate
+    wav_filename = mp3_to_wav(filename, delete_mp3=True)
+    resample_audio_file_to_16k(wav_filename, wav_filename, target_samplerate=16000)
+
+    return wav_filename
 
 
 async def generate_edge_tts_voice() -> str:
@@ -74,9 +80,8 @@ async def generate_edge_tts_voice() -> str:
     filename = f"{BASE_OUTPUT_DIR}-{selected_voice}-{time_id}.mp3"
 
     await text_to_speech(text, selected_voice, rate, pitch, filename=filename)
-    filename = mp3_to_wav(filename, delete_mp3=True)
 
-    print(f"Audio saved to: {filename}")
+    print(f"Audio saved to: {filename.replace('.mp3', '.wav')}")
 
     return filename
 
@@ -113,7 +118,9 @@ def generate_edge_tts_voice_loop(
         for filename in generated_files:
             try:
                 print(f"Processing: {filename}")
-                remove_silence_from_file(filename, filename)  # Same input and output path to overwrite
+                remove_silence_from_file(
+                    filename, filename
+                )  # Same input and output path to overwrite
                 print(f"Silence removed from: {filename}")
             except Exception as e:
                 print(f"Error removing silence from {filename}: {str(e)}")

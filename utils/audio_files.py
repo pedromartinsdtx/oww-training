@@ -3,9 +3,13 @@
 # pip install audioop-lts
 
 
+import os
 from pathlib import Path
 from typing import Optional
 
+import librosa
+import numpy as np
+import soundfile as sf
 from pydub import AudioSegment
 from pydub.utils import mediainfo
 
@@ -46,6 +50,53 @@ def mp3_to_wav(
     return str(wav_path)
 
 
+def resample_audio_to_16k(
+    audio_data: np.ndarray, original_samplerate: int, target_samplerate: int = 16000
+) -> np.ndarray:
+    """
+    Resamples audio data to 16 kHz.
+    """
+    if audio_data.ndim > 1 and audio_data.shape[1] == 1:
+        audio_data = audio_data[:, 0]  # Convert to mono if needed
+
+    resampled_audio = librosa.resample(
+        y=audio_data, orig_sr=original_samplerate, target_sr=target_samplerate
+    )
+    return resampled_audio
+
+
+def resample_audio_file_to_16k(
+    input_filepath: str, output_filepath: str = None, target_samplerate: int = 16000
+) -> str:
+    """
+    Resamples an audio file to 16 kHz and saves the output.
+
+    Parameters:
+        input_filepath (str): Path to the input audio file.
+        output_filepath (str, optional): Path to save the resampled file. If None, appends '_16k.wav' to the original filename.
+
+    Returns:
+        str: Path to the resampled audio file.
+    """
+    # Load audio
+    audio_data, orig_sr = librosa.load(input_filepath, sr=None, mono=True)
+
+    # Resample to 16 kHz
+    resampled_audio = librosa.resample(
+        audio_data, orig_sr=orig_sr, target_sr=target_samplerate
+    )
+
+    # Define output file path
+    if output_filepath is None:
+        base, _ = os.path.splitext(input_filepath)
+        output_filepath = f"{base}_16k.wav"
+
+    # Save resampled audio
+    sf.write(
+        output_filepath, resampled_audio, samplerate=target_samplerate, format="WAV"
+    )
+
+    return output_filepath
 
 
 if __name__ == "__main__":
