@@ -11,24 +11,28 @@ model = Model()
 
 audio_folder_paths = ["samples/clarisse"]
 # audio_folder_paths = ["samples/olá-clarisse"]
+audio_folder_paths = ["samples/hei-clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
     audio_file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
-# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 wakeword_models_paths = [
-    f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
-    f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
-    f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
+    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
+    # "models-ww/eeii_cleddeess.onnx",
     # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
     # "models-ww/holá_cleddeess.onnx",
     # "models-ww/olá_cleddeess.onnx",
     # "models-ww/olá_cleddeess-v2.onnx",
+    "models-ww/eeii_cleddeess.onnx",
+    "models-ww/eeii_cleddeess_v2.onnx",
 ]
+# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
@@ -44,7 +48,7 @@ print("Results:")
 total_files_processed = 0
 total_files_activated = 0
 model_activation_counts = {}
-file_max_scores = {}  # {file_path: {model_name: max_score}}
+file_max_scores = {}
 
 for file_path, segment_scores_list in results.items():
     total_files_processed += 1
@@ -95,7 +99,7 @@ print("\nModel Activation Counts (files activated by each model):")
 sorted_model_counts = sorted(
     model_activation_counts.items(),
     key=lambda item: (item[1] / total_files_processed) * 100,
-    reverse=True
+    reverse=True,
 )
 
 for model_name, count in sorted_model_counts:
