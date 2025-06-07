@@ -10,7 +10,7 @@ model = Model()
 # model.predict_clip("path/to/wav/file")
 
 # audio_folder_paths = ["samples/clarisse"]
-audio_folder_paths = ["samples/olá_clarisse"]
+audio_folder_paths = ["samples/olá-clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
@@ -22,10 +22,12 @@ wakeword_models_paths = [
     # f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
     # f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
     # f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
-    f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
-    f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
-    f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
+    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
+    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
+    # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
     "models-ww/holá_cleddeess.onnx",
+    "models-ww/olá_cleddeess.onnx",
+    "models-ww/olá_cleddeess-v2.onnx",
 ]
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
@@ -90,6 +92,12 @@ print(
     f"Total Files Not Activated: {total_files_processed - total_files_activated} ({((total_files_processed - total_files_activated) / total_files_processed) * 100:.2f}%)"
 )
 print("\nModel Activation Counts (files activated by each model):")
-for model_name, count in model_activation_counts.items():
+sorted_model_counts = sorted(
+    model_activation_counts.items(),
+    key=lambda item: (item[1] / total_files_processed) * 100,
+    reverse=True
+)
+
+for model_name, count in sorted_model_counts:
     percentage = (count / total_files_processed) * 100
     print(f"  {model_name}: {count} ({percentage:.2f}%)")
