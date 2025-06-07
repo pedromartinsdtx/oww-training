@@ -9,9 +9,8 @@ ACTIVATION_THRESHOLD = 0.5
 model = Model()
 # model.predict_clip("path/to/wav/file")
 
-# folder_paths = ["samples/samples_edge_pt_augmented"]
-# folder_paths = ["samples/gemini"]
-audio_folder_paths = ["samples"]
+# audio_folder_paths = ["samples/clarisse"]
+audio_folder_paths = ["samples/olá_clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
@@ -26,6 +25,7 @@ wakeword_models_paths = [
     f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
     f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
     f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
+    "models-ww/holá_cleddeess.onnx",
 ]
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.

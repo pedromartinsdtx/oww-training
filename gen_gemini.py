@@ -161,7 +161,7 @@ GEMINI_AVAILABLE_MODELS = [
     "gemini-2.5-pro-preview-tts",
 ]
 
-BASE_OUTPUT_DIR = "samples/gemini/clrs-gem"
+BASE_OUTPUT_DIR = "samples/clarisse/gemini/clrs-gem"
 
 
 def generate_gemini_voice(

@@ -1,37 +1,30 @@
-import os
-from pydub import AudioSegment
 import argparse
+import os
+
+import librosa
+import soundfile as sf
 
 # Define supported audio formats
 SUPPORTED_FORMATS = ".wav"
 
 
-def resample_audio_to_16khz(folder_path):
+def resample_audio_to_16khz_librosa(folder_path):
     for root, _, files in os.walk(folder_path):
         for file in files:
             if file.lower().endswith(SUPPORTED_FORMATS):
                 file_path = os.path.join(root, file)
                 try:
-                    # Load audio
-                    audio = AudioSegment.from_file(file_path)
+                    # Load audio with original sample rate
+                    audio, sr = librosa.load(file_path, sr=None)
 
-                    if audio.frame_rate != 16000:
-                        print(
-                            f"Resampling: {file_path} ({audio.frame_rate} Hz → 16000 Hz)"
-                        )
+                    if sr != 16000:
+                        print(f"Resampling: {file_path} ({sr} Hz → 16000 Hz)")
 
-                        # Resample to 16kHz
-                        audio_16k = audio.set_frame_rate(16000)
+                        # Resample audio
+                        audio_16k = librosa.resample(audio, orig_sr=sr, target_sr=16000)
 
-                        # Temporary file path with same extension
-                        temp_path = file_path + ".temp"
-
-                        # Export and replace original
-                        audio_16k.export(
-                            temp_path, format=os.path.splitext(file_path)[1][1:]
-                        )
-                        os.remove(file_path)
-                        os.rename(temp_path, file_path)
+                        # Save resampled audio
+                        sf.write(file_path, audio_16k, 16000)
                     else:
                         print(f"Already 16kHz: {file_path}")
                 except Exception as e:
@@ -46,6 +39,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if os.path.isdir(args.folder):
-        resample_audio_to_16khz(args.folder)
+        resample_audio_to_16khz_librosa(args.folder)
     else:
         print("Invalid folder path.")
