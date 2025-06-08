@@ -25,6 +25,7 @@ wakeword_models_paths = [
     f"{WW_MODELS_FOLDER}/Clarisse_v3_piper.onnx",
     f"{WW_MODELS_FOLDER}/Clarisse_v4_piper.onnx",
     f"{WW_MODELS_FOLDER}/Clarisse_v5_piper.onnx",
+    f"{WW_MODELS_FOLDER}/Clarisse_v6_piper.onnx",
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
     # "models-ww/eeii_cleddeess.onnx",
