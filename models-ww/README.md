@@ -20,5 +20,6 @@ This repository contains trained wake word detection models with their respectiv
 | Clarisse_v1.2-piper | 10000 | 50000 | 1500 | 0.7 | 0.4 | 2000 | - | (A lot of spanish voices with tugao)
 | Clarisse_v2_piper | 10000 | 50000 | 1500 | 0.7 | 0.4 | - | - | (Just Tugao e Rita voices)
 | Clarisse_v2.5_piper | - | 50000 | 1500 | - | - | - | - | (Just Tugao e Rita voices)
-| Clarisse_v3_piper | 10000 | 50000 | 1500 | - | - | 5000 | - | (Tugao, Rita, Cori, espanhol, italiano voices e tirei o "Clarisse, ")
+| Clarisse_v3_piper | 10000 | 50000 | 1500 | - | - | 5000 | - | (Tugao, Rita, tirei o "Clarisse, ")
+| Clarisse_v4_piper | 5000 | 50000 | 1500 | - | - | 200 | - | (Tugao, Rita, tirei o "Clarisse, ")
 
