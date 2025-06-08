@@ -23,5 +23,5 @@ This repository contains trained wake word detection models with their respectiv
 | Clarisse_v3_piper | 10000 | 50000 | 1500 | - | - | 5000 | - | (Tugao, Rita, tirei o "Clarisse, ")
 | Clarisse_v4_piper | 5000 | 50000 | 1500 | - | - | 200 | - | (Tugao, Rita, tirei o "Clarisse, ")
 | Clarisse_v5_piper | 5000 | 10000 | 1500 | - | - | 200 | - | (Tugao, Espanhol, italiano) (Model Accuracy: 0.6675; Model Recall: 0.335; Model False Positives per Hour: 0.0)
-| Clarisse_v6_piper | 10000 | 20000 | 1500 | - | - | 200 | - | (Tugao, Rita, Espanhol, Italiano)
+| Clarisse_v6_piper | 10000 | 20000 | 1500 | - | - | 500 | - | (Tugao, Rita, Espanhol, Italiano) (Final Model Accuracy: 0.7570000290870667; Final Model Recall: 0.515999972820282; Final Model False Positives per Hour: 0.0)
 
