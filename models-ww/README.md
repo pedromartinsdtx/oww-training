@@ -23,10 +23,10 @@ This repository contains trained wake word detection models with their respectiv
 
 | Model Name           | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy    | Recall | False Positives per Hour | Notes                                         |
 | -------------------- | ---------------- | -------------- | ------------------------ | ------------------ | ----------- | ------ | ------------------------ | --------------------------------------------- |
-| Ólá_Clãriss-v2_piper | 20000            | 30000          | 1500                     | 1000               | 0.79 *(95%) | 0.58   | 0.7                      | Ólá Clãriss(?) (PTs, BRs, Espanhol)           |
+| Ólá_Clãriss-v2-piper | 20000            | 30000          | 1500                     | 1000               | 0.79 *(95%) | 0.58   | 0.7                      | Ólá Clãriss(?) (PTs, BRs, Espanhol)           |
 | olá_cledeess-v4      | 5000             | 15000          | 1500                     | 500                | *95%        | -      | -                        | Colab                                         |
 | olá_cledeess-v3      | 1000             | 10000          | 1500                     | 100                | *90%        | ?      | ?                        | Colab                                         |
-| Olá_Clãriss-v1_piper | 20000            | 30000          | 1500                     | 1000               | 0.84 *(88%) | 0.68   | 0.35                     | Olá Clãriss(?) (PTs, BRs, Espanhol, Italiano) |
+| Olá_Clãriss-v1-piper | 20000            | 30000          | 1500                     | 1000               | 0.84 *(88%) | 0.68   | 0.35                     | Olá Clãriss(?) (PTs, BRs, Espanhol, Italiano) |
 | olá_cleddeess-v2     | 2700             | 10000          | 1500                     | 270                | *61%        | ?      | ?                        | Colab                                         |
 | olá_cleddeess        | 1000             | 10000          | 1500                     | 100                | *78%        | ?      | ?                        | Colab                                         |
 | holá_cleddeess       | 1000             | 10000          | 1500                     | 100                | *40%        | ?      | ?                        | Colab                                         |

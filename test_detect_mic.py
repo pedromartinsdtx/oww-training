@@ -82,30 +82,21 @@ if args.model_path != "":
         # enable_speex_noise_suppression=not args.no_noise_suppression,
     )
 else:
+    inference_framework = "onnx"
+    # models_path = CLARISSE_MODELS
+    # models_path = HEY_CLARISSE_MODELS
+    models_path = OLA_CLARISSE_MODELS
     wakeword_models = [
-        os.path.join("models", f) for f in os.listdir("models") if f.endswith(".tflite")
+        os.path.join(models_path, f)
+        for f in os.listdir(models_path)
+        if f.endswith(f".{inference_framework}")
     ]
     owwModel = Model(
-        # wakeword_models=wakeword_models,
-        wakeword_models=[
-            # "alexa_v0.1.tflite",
-            # f"{CLARISSE_MODELS}/Clarisse_v-piper.onnx",
-            # f"{CLARISSE_MODELS}/Clarisse_v1.2-piper.onnx",
-            # f"{CLARISSE_MODELS}/Clarisse_v2_piper.onnx",
-            # f"{CLARISSE_MODELS}/Clarisse_v2.5_piper.onnx",
-            #
-            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
-            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
-            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
-            #
-            f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
-            f"{OLA_CLARISSE_MODELS}/olá_cleddeess-v2.onnx",
-            f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
-            f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
-            f"{OLA_CLARISSE_MODELS}/olá_cleddeess.onnx",
-        ],
-        inference_framework="onnx",
-        # inference_framework="tflite",
+        # wakeword_models=[
+        #     "alexa_v0.1.tflite",    
+        # ],
+        wakeword_models=wakeword_models,
+        inference_framework=inference_framework,
         # enable_speex_noise_suppression=not args.no_noise_suppression,
     )
 
