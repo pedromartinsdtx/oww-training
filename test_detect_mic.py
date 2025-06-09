@@ -198,6 +198,10 @@ if __name__ == "__main__":
     while True:
         audio_data_raw = mic_stream.read(CHUNK, exception_on_overflow=False)
         audio_data_np = np.frombuffer(audio_data_raw, dtype=np.int16)
+
+        # Add raw audio to buffer for saving
+        audio_buffer.extend(audio_data_np)
+
         audio_float = audio_data_np.astype(np.float32)
         downsampled = signal.decimate(audio_float, downsample_ratio, ftype="iir")
         audio_16k = downsampled.astype(np.int16)

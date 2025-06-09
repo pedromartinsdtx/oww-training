@@ -9,8 +9,8 @@ ACTIVATION_THRESHOLD = 0.5
 model = Model()
 # model.predict_clip("path/to/wav/file")
 
-audio_folder_paths = ["samples/clarisse"]
-# audio_folder_paths = ["samples/olá-clarisse"]
+# audio_folder_paths = ["samples/clarisse"]
+audio_folder_paths = ["samples/olá-clarisse"]
 # audio_folder_paths = ["samples/hei-clarisse"]
 
 audio_file_paths = []
@@ -30,11 +30,13 @@ wakeword_models_paths = [
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
     # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
     #
-    # f"{WW_MODELS_FOLDER}/Olá_Clãriss-v1-piper.onnx",
-    # f"{WW_MODELS_FOLDER}/holá_cleddeess.onnx",
-    # f"{WW_MODELS_FOLDER}/olá_cleddeess.onnx",
-    # f"{WW_MODELS_FOLDER}/olá_cleddeess-v2.onnx",
-    # f"{WW_MODELS_FOLDER}/olá_cledeess-v3.onnx",
+    f"{WW_MODELS_FOLDER}/Olá_Clãriss-v1-piper.onnx",
+    f"{WW_MODELS_FOLDER}/Ólá_Clãriss-v2-piper.onnx",
+    f"{WW_MODELS_FOLDER}/holá_cleddeess.onnx",
+    f"{WW_MODELS_FOLDER}/olá_cleddeess.onnx",
+    f"{WW_MODELS_FOLDER}/olá_cleddeess-v2.onnx",
+    f"{WW_MODELS_FOLDER}/olá_cledeess-v3.onnx",
+    f"{WW_MODELS_FOLDER}/olá_cledeess-v4.onnx",
     #
     # f"{WW_MODELS_FOLDER}/eeii_cleddeess.onnx",
     # f"{WW_MODELS_FOLDER}/eeii_cleddeess_v2.onnx",
@@ -43,7 +45,7 @@ wakeword_models_paths = [
     # f"{WW_MODELS_FOLDER}/Hey_Clariss_v2_piper.onnx",
     #
 ]
-wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
+# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
