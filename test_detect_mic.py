@@ -66,7 +66,7 @@ mic_stream = audio.open(
     rate=RATE,
     input=True,
     frames_per_buffer=CHUNK,
-    # input_device_index=2, #! É preciso esta linha no Raspberry Pi 4 para funcionar
+    # input_device_index=2, #! É preciso esta linha no Raspberry Pi para funcionar
 )
 
 # Load openwakeword model
@@ -81,17 +81,21 @@ else:
         os.path.join("models", f) for f in os.listdir("models") if f.endswith(".tflite")
     ]
     owwModel = Model(
+        # wakeword_models=wakeword_models,
         wakeword_models=[
             # "alexa_v0.1.tflite",
-            "models-ww/Clarisse_v-piper.onnx",
-            "models-ww/Clarisse_v1.2-piper.onnx",
-            "models-ww/Clarisse_v2_piper.onnx",
-            "models-ww/Clarisse_v2.5_piper.onnx",
+            # "models-ww/Clarisse_v-piper.onnx",
+            # "models-ww/Clarisse_v1.2-piper.onnx",
+            # "models-ww/Clarisse_v2_piper.onnx",
+            # "models-ww/Clarisse_v2.5_piper.onnx",
+            "models-ww/Hey_Clariss_v1_piper.onnx",
+            "models-ww/Hey_Clariss_v1.2_piper.onnx",
+            "models-ww/Hey_Clariss_v2_piper.onnx",
+            "models-ww/eeii_cleddeess.onnx",
+            "models-ww/eeii_cleddeess_v2.onnx",
         ],
-        # wakeword_models=wakeword_models,
-        # inference_framework="tflite",
-        # wakeword_models=["models/Clarisse_v-piper.onnx"],
         inference_framework="onnx",
+        # inference_framework="tflite",
         # enable_speex_noise_suppression=not args.no_noise_suppression,
     )
 

@@ -30,11 +30,11 @@ This repository contains trained wake word detection models with their respectiv
 
 ## Hey Clarisse Models
 
-| Model Name              | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                   |
-| ----------------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------- |
-| hey_Clarisse_v1.2_piper | 20000            | 30000          | 1500                     | 500                |          |        |                          | Clãrisse (PTs, BRs, Espanhol, Italiano) |
-| hey_Clarisse_v1_piper   | 20000            | 30000          | 1500                     | 500                |          |        |                          | (Tugao, Rita, Espanhol, Italiano)       |
-| hey_cledees-v3          | 10300            | 20000          | 1500                     | -                  | -        | -      | -                        |                                         |
-| eeii_cleddeess-v2       | 5050             | 19000          | 1500                     | -                  | *62%     | -      | -                        | Colab                                   |
-| eeii_cleddeess          | 1000             | 10000          | 1500                     | -                  | *59%     | -      | -                        | Colab                                   |
+| Model Name             | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                             |
+| ---------------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------- |
+| hey_Clariss_v2_piper   | 10000            | 20000          | 1500                     | 500                | 0.74     | 0.48   | 0.7                      | Clãriss (PTs, BRs, Espanhol)      |
+| Hey_Clariss_v1_piper   | 20000            | 30000          | 1500                     | 500                | 0.80     | 0.60   | 0.5                      | Clariss (PTs, Espanhol, Italiano) |
+| Hey_Clariss_v1.2_piper | 30000            | 40000          | 1500                     | 500                | 0.81     | 0.62   | 1.07                     | Clariss (PTs, Espanhol, Italiano) |
+| eeii_cleddeess-v2      | 5050             | 19000          | 1500                     | -                  | *62%     | -      | -                        | Colab                             |
+| eeii_cleddeess         | 1000             | 10000          | 1500                     | -                  | *59%     | -      | -                        | Colab                             |
 

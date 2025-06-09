@@ -34,6 +34,9 @@ wakeword_models_paths = [
     # "models-ww/olá_cleddeess-v2.onnx",
     "models-ww/eeii_cleddeess.onnx",
     "models-ww/eeii_cleddeess_v2.onnx",
+    "models-ww/Hey_Clariss_v1_piper.onnx",
+    "models-ww/Hey_Clariss_v1.2_piper.onnx",
+    "models-ww/Hey_Clariss_v2_piper.onnx",
 ]
 wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
