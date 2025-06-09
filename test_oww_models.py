@@ -9,9 +9,9 @@ ACTIVATION_THRESHOLD = 0.5
 model = Model()
 # model.predict_clip("path/to/wav/file")
 
-# audio_folder_paths = ["samples/clarisse"]
+audio_folder_paths = ["samples/clarisse"]
 # audio_folder_paths = ["samples/olá-clarisse"]
-audio_folder_paths = ["samples/hei-clarisse"]
+# audio_folder_paths = ["samples/hei-clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
@@ -29,14 +29,19 @@ wakeword_models_paths = [
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
     # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
-    # "models-ww/holá_cleddeess.onnx",
-    # "models-ww/olá_cleddeess.onnx",
-    # "models-ww/olá_cleddeess-v2.onnx",
-    "models-ww/eeii_cleddeess.onnx",
-    "models-ww/eeii_cleddeess_v2.onnx",
-    "models-ww/Hey_Clariss_v1_piper.onnx",
-    "models-ww/Hey_Clariss_v1.2_piper.onnx",
-    "models-ww/Hey_Clariss_v2_piper.onnx",
+    #
+    # f"{WW_MODELS_FOLDER}/Olá_Clãriss-v1-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/holá_cleddeess.onnx",
+    # f"{WW_MODELS_FOLDER}/olá_cleddeess.onnx",
+    # f"{WW_MODELS_FOLDER}/olá_cleddeess-v2.onnx",
+    # f"{WW_MODELS_FOLDER}/olá_cledeess-v3.onnx",
+    #
+    # f"{WW_MODELS_FOLDER}/eeii_cleddeess.onnx",
+    # f"{WW_MODELS_FOLDER}/eeii_cleddeess_v2.onnx",
+    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v1_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v1.2_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v2_piper.onnx",
+    #
 ]
 wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
