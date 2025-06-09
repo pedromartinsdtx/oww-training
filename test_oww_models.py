@@ -9,34 +9,33 @@ ACTIVATION_THRESHOLD = 0.5
 model = Model()
 # model.predict_clip("path/to/wav/file")
 
-audio_folder_paths = ["samples/clarisse"]
+# audio_folder_paths = ["samples/clarisse"]
 # audio_folder_paths = ["samples/olá-clarisse"]
-# audio_folder_paths = ["samples/hei-clarisse"]
+audio_folder_paths = ["samples/hei-clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
     audio_file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
 wakeword_models_paths = [
-    f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v3_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v4_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v5_piper.onnx",
-    f"{WW_MODELS_FOLDER}/Clarisse_v6_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v3_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v4_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v5_piper.onnx",
+    # f"{WW_MODELS_FOLDER}/Clarisse_v6_piper.onnx",
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
     # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
-    # "models-ww/eeii_cleddeess.onnx",
     # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
     # "models-ww/holá_cleddeess.onnx",
     # "models-ww/olá_cleddeess.onnx",
     # "models-ww/olá_cleddeess-v2.onnx",
-    # "models-ww/eeii_cleddeess.onnx",
-    # "models-ww/eeii_cleddeess_v2.onnx",
+    "models-ww/eeii_cleddeess.onnx",
+    "models-ww/eeii_cleddeess_v2.onnx",
 ]
-# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
+wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
