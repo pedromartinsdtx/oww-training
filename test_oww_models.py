@@ -4,6 +4,10 @@ from openwakeword.model import Model
 from openwakeword.utils import bulk_predict
 
 WW_MODELS_FOLDER = "models-ww"
+CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/clarisse"
+HEY_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/hey-clarisse"
+OLA_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/ola-clarisse"
+
 ACTIVATION_THRESHOLD = 0.5
 
 model = Model()
@@ -18,31 +22,31 @@ for folder in audio_folder_paths:
     audio_file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
 wakeword_models_paths = [
-    # f"{WW_MODELS_FOLDER}/Clarisse_v-piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v1.2-piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v2_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v2.5_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v3_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v4_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v5_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Clarisse_v6_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v5.onnx",
-    # f"{WW_MODELS_FOLDER}/CLEDEESSS_v6.onnx",
-    # f"{WW_MODELS_FOLDER}/cledeesss_v7.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v-piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v1.2-piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v2_piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v2.5_piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v3_piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v4_piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v5_piper.onnx",
+    # f"{CLARISSE_MODELS}/Clarisse_v6_piper.onnx",
+    # f"{CLARISSE_MODELS}/CLEDEESSS_v5.onnx",
+    # f"{CLARISSE_MODELS}/CLEDEESSS_v6.onnx",
+    # f"{CLARISSE_MODELS}/cledeesss_v7.onnx",
     #
-    f"{WW_MODELS_FOLDER}/Olá_Clãriss-v1-piper.onnx",
-    f"{WW_MODELS_FOLDER}/Ólá_Clãriss-v2-piper.onnx",
-    f"{WW_MODELS_FOLDER}/holá_cleddeess.onnx",
-    f"{WW_MODELS_FOLDER}/olá_cleddeess.onnx",
-    f"{WW_MODELS_FOLDER}/olá_cleddeess-v2.onnx",
-    f"{WW_MODELS_FOLDER}/olá_cledeess-v3.onnx",
-    f"{WW_MODELS_FOLDER}/olá_cledeess-v4.onnx",
+    f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
+    f"{OLA_CLARISSE_MODELS}/Ólá_Clãriss-v2-piper.onnx",
+    f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
+    f"{OLA_CLARISSE_MODELS}/olá_cleddeess.onnx",
+    f"{OLA_CLARISSE_MODELS}/olá_cleddeess-v2.onnx",
+    f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
+    f"{OLA_CLARISSE_MODELS}/olá_cledeess-v4.onnx",
     #
-    # f"{WW_MODELS_FOLDER}/eeii_cleddeess.onnx",
-    # f"{WW_MODELS_FOLDER}/eeii_cleddeess_v2.onnx",
-    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v1_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v1.2_piper.onnx",
-    # f"{WW_MODELS_FOLDER}/Hey_Clariss_v2_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess.onnx",
+    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess_v2.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
     #
 ]
 # wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")

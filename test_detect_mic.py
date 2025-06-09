@@ -69,6 +69,11 @@ mic_stream = audio.open(
     # input_device_index=2, #! É preciso esta linha no Raspberry Pi para funcionar
 )
 
+WW_MODELS_FOLDER = "models-ww"
+CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/clarisse"
+HEY_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/hey-clarisse"
+OLA_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/ola-clarisse"
+
 # Load openwakeword model
 if args.model_path != "":
     owwModel = Model(
@@ -84,20 +89,20 @@ else:
         # wakeword_models=wakeword_models,
         wakeword_models=[
             # "alexa_v0.1.tflite",
-            # "models-ww/Clarisse_v-piper.onnx",
-            # "models-ww/Clarisse_v1.2-piper.onnx",
-            # "models-ww/Clarisse_v2_piper.onnx",
-            # "models-ww/Clarisse_v2.5_piper.onnx",
+            # f"{CLARISSE_MODELS}/Clarisse_v-piper.onnx",
+            # f"{CLARISSE_MODELS}/Clarisse_v1.2-piper.onnx",
+            # f"{CLARISSE_MODELS}/Clarisse_v2_piper.onnx",
+            # f"{CLARISSE_MODELS}/Clarisse_v2.5_piper.onnx",
             #
-            # "models-ww/Hey_Clariss_v1_piper.onnx",
-            # "models-ww/Hey_Clariss_v1.2_piper.onnx",
-            # "models-ww/Hey_Clariss_v2_piper.onnx",
+            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
+            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
+            # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
             #
-            "models-ww/Olá_Clãriss-v1-piper.onnx",
-            "models-ww/olá_cleddeess-v2.onnx",
-            "models-ww/olá_cledeess-v3.onnx",
-            "models-ww/holá_cleddeess.onnx",
-            "models-ww/olá_cleddeess.onnx",
+            f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
+            f"{OLA_CLARISSE_MODELS}/olá_cleddeess-v2.onnx",
+            f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
+            f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
+            f"{OLA_CLARISSE_MODELS}/olá_cleddeess.onnx",
         ],
         inference_framework="onnx",
         # inference_framework="tflite",
