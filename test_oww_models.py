@@ -7,6 +7,7 @@ WW_MODELS_FOLDER = "models-ww"
 CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/clarisse"
 HEY_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/hey-clarisse"
 OLA_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/ola-clarisse"
+PARA_MODELS = f"{WW_MODELS_FOLDER}/para"
 
 ACTIVATION_THRESHOLD = 0.5
 
@@ -49,7 +50,7 @@ wakeword_models_paths = [
     # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
     #
 ]
-# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
+wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames

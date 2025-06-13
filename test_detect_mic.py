@@ -1,13 +1,12 @@
 import argparse
 import os
-import threading
 import time
 import wave
 from collections import deque
 
 import numpy as np
 import pyaudio
-import pygame
+import simpleaudio as sa
 from openwakeword.model import Model
 from scipy import signal
 
@@ -35,10 +34,10 @@ parser.add_argument(
     required=False,
 )
 parser.add_argument(
-    "--detection-sound",
+    "--detection_sound",
     help="The sound to play when wakeword is detected",
     type=str,
-    default="ww_check.mp3",
+    default="ww_check.wav",
     required=False,
 )
 parser.add_argument(
@@ -73,6 +72,7 @@ WW_MODELS_FOLDER = "models-ww"
 CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/clarisse"
 HEY_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/hey-clarisse"
 OLA_CLARISSE_MODELS = f"{WW_MODELS_FOLDER}/ola-clarisse"
+PARA_MODELS = f"{WW_MODELS_FOLDER}/para"
 
 # Load openwakeword model
 if args.model_path != "":
@@ -82,18 +82,17 @@ if args.model_path != "":
         # enable_speex_noise_suppression=not args.no_noise_suppression,
     )
 else:
-    inference_framework = "onnx"
-    # models_path = CLARISSE_MODELS
-    # models_path = HEY_CLARISSE_MODELS
-    models_path = OLA_CLARISSE_MODELS
+    inference_framework = "tflite"
+    models_path = PARA_MODELS
     wakeword_models = [
         os.path.join(models_path, f)
         for f in os.listdir(models_path)
         if f.endswith(f".{inference_framework}")
     ]
+
     owwModel = Model(
         # wakeword_models=[
-        #     "alexa_v0.1.tflite",    
+        #     "alexa_v0.1.tflite",
         # ],
         wakeword_models=wakeword_models,
         inference_framework=inference_framework,
@@ -114,8 +113,8 @@ def save_audio_buffer(score, filename=None):
         timestamp = time.strftime("%m%d_%H%M%S")
         filename = f"ww_{timestamp}_{score}.wav"
 
-    os.makedirs("audios/logs", exist_ok=True)
-    filepath = os.path.join("audios/logs", filename)
+    os.makedirs("logs/test-detect-mic", exist_ok=True)
+    filepath = os.path.join("logs/test-detect-mic", filename)
 
     audio_data = np.array(list(audio_buffer), dtype=np.int16)
 
@@ -128,20 +127,21 @@ def save_audio_buffer(score, filename=None):
     return filepath
 
 
-def play_sound():
-    def play_sound_thread():
-        try:
-            pygame.mixer.music.load(f"audios/{args.detection_sound}")
-            pygame.mixer.music.play()
+def play_audio_file(audio_file: str, wait: bool = False):
+    try:
+        if not audio_file.lower().endswith(".wav"):
+            print(
+                "SimpleAudio doesn't natively support MP3. Converting or using a WAV file is recommended."
+            )
+            return
 
-            while pygame.mixer.music.get_busy():
-                time.sleep(0.1)
-        except Exception as e:
-            print(f"Error playing sound: {e}")
+        wave_obj = sa.WaveObject.from_wave_file(audio_file)
+        play_obj = wave_obj.play()
 
-    sound_thread = threading.Thread(target=play_sound_thread)
-    sound_thread.daemon = True
-    sound_thread.start()
+        if wait:
+            play_obj.wait_done()
+    except Exception as e:
+        print(f"Error playing sound from file {audio_file}: {e}")
 
 
 def handle_wakeword_detection(score):
@@ -153,43 +153,24 @@ def handle_wakeword_detection(score):
 
     last_detection_time = current_time
 
-    play_sound()
+    play_audio_file(f"audio_samples/{args.detection_sound}")
     save_audio_buffer(score)
 
 
-def suppress_alsa_errors():
-    # Suppress ALSA errors by redirecting stderr temporarily
-    import ctypes
-
-    ERROR_HANDLER_FUNC = ctypes.CFUNCTYPE(
-        None,
-        ctypes.c_char_p,
-        ctypes.c_int,
-        ctypes.c_char_p,
-        ctypes.c_int,
-        ctypes.c_char_p,
-    )
-
-    def py_error_handler(filename, line, function, err, fmt):
-        pass
-
-    c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
-    try:
-        asound = ctypes.cdll.LoadLibrary("libasound.so")
-        asound.snd_lib_error_set_handler(c_error_handler)
-    except Exception:
-        pass
-
-
 if __name__ == "__main__":
-    # suppress_alsa_errors()
-    pygame.mixer.init()  # Initialize mixer once at the start
-
     print("\n\n")
     print("#" * 100)
     print("Listening for wakewords...")
     print("#" * 100)
     print("\n" * (n_models * 3))
+
+    # Create a file to log wakeword triggers
+    os.makedirs("logs", exist_ok=True)
+    ww_trigger_log_path = os.path.join("logs", "ww_triggers.txt")
+
+    with open(ww_trigger_log_path, "w") as log_file:
+        log_file.write("Wakeword Trigger Log\n")
+        log_file.write("=" * 50 + "\n")
 
     while True:
         audio_data_raw = mic_stream.read(CHUNK, exception_on_overflow=False)
@@ -216,7 +197,16 @@ if __name__ == "__main__":
 
             if scores[-1] > 0.5:
                 wakeword_status = "Wakeword Detected!"
+                with open(ww_trigger_log_path, "a") as log_file:
+                    log_entry = (
+                        f"Model: {mdl}, Time: {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                    )
+                    with open(ww_trigger_log_path, "r+") as log_file:
+                        existing_entries = log_file.readlines()
+                        if log_entry not in existing_entries:
+                            log_file.write(log_entry)
                 handle_wakeword_detection(curr_score)
+
             else:
                 wakeword_status = "--"
 
