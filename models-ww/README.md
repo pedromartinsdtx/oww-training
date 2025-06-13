@@ -44,6 +44,6 @@ This repository contains trained wake word detection models with their respectiv
 
 ## Pára Models
 
-...
-| Model Name | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes |
-| ---------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | ----- |
+| Model Name | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                               |
+| ---------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------------------- |
+| paáraa     | 10000            | 20000          | 1500                     | 1000               | 0.699    | 0.398  | 1.77                     | (PT-PT tugão, ES davefx/sharvard, PT-BR cadu/faber) |
