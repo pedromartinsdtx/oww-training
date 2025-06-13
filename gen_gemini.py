@@ -20,6 +20,32 @@ from utils.play_audio import play_audio_file
 
 load_dotenv()
 
+# TARGET_PHRASE = "clarisse"
+TARGET_PHRASE = "pára"
+
+parser = argparse.ArgumentParser(description="Generate voice samples using Gemini TTS")
+parser.add_argument(
+    "--play-audio",
+    action="store_true",
+    help="Play audio files after generation (default: False)",
+)
+parser.add_argument(
+    "--iterations",
+    type=int,
+    default=20,
+    help="Number of iterations to run (default: 20)",
+)
+parser.add_argument(
+    "--phrase",
+    type=str,
+    default=TARGET_PHRASE,
+    help="Target phrase to generate voice for (Exemplo: 'Clarisse')",
+)
+
+args = parser.parse_args()
+
+TARGET_PHRASE = args.phrase
+
 
 def _resample_audio(
     self, audio_data: np.ndarray, original_samplerate: int, target_samplerate: int
@@ -120,7 +146,7 @@ def save_binary_file(file_name, data):
     print(f"File saved to to: {file_name}")
 
 
-PROMPT = "Diz apenas a palavra 'Clarisse', em português de Portugal, como se estivesses a chamar um assistente virtual — no estilo de dizer 'Alexa' ou 'Siri'."
+PROMPT = f"Diz apenas a palavra '{TARGET_PHRASE}', em português de Portugal."
 
 GEMINI_AVAILABLE_VOICES = [
     "Zephyr",
@@ -161,7 +187,8 @@ GEMINI_AVAILABLE_MODELS = [
     "gemini-2.5-pro-preview-tts",
 ]
 
-BASE_OUTPUT_DIR = "samples/clarisse/gemini/clrs-gem"
+BASE_OUTPUT_DIR = f"samples/{TARGET_PHRASE}/gemini/clrs-gem"
+os.makedirs(os.path.dirname(BASE_OUTPUT_DIR), exist_ok=True)
 
 
 def generate_gemini_voice(
@@ -301,24 +328,7 @@ def gemini_loop(iterations: int = 20, play_audio: bool = False):
 if __name__ == "__main__":
     """
     python3 -m services.gemini
-    python3 gen_gemini.py --play-audio
+    python3 gen_gemini.py --play-audio --phrase "pára" --iterations 20
     """
-
-    parser = argparse.ArgumentParser(
-        description="Generate voice samples using Gemini TTS"
-    )
-    parser.add_argument(
-        "--play-audio",
-        action="store_true",
-        help="Play audio files after generation (default: False)",
-    )
-    parser.add_argument(
-        "--iterations",
-        type=int,
-        default=20,
-        help="Number of iterations to run (default: 20)",
-    )
-
-    args = parser.parse_args()
 
     gemini_loop(iterations=args.iterations, play_audio=args.play_audio)
