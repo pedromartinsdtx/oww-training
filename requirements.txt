@@ -1,3 +1,9 @@
+numpy
+onnxruntime
+soundfile
+torch
+torchaudio
+piper-phonemize
 google-genai
 pydub
 audioop-lts
