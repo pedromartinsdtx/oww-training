@@ -1,8 +1,6 @@
 # Requirements
 ```sh
-sudo apt install portaudio19-dev
-sudo apt install -y pulseaudio pulseaudio-utils
-sudo apt install ffmpeg
+sudo apt install -y portaudio19-dev pulseaudio pulseaudio-utils ffmpeg
 ```
 
 # Useful commands
