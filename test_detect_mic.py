@@ -83,7 +83,7 @@ if args.model_path != "":
     )
 else:
     inference_framework = "tflite"
-    models_path = PARA_MODELS
+    models_path = HEY_CLARISSE_MODELS
     wakeword_models = [
         os.path.join(models_path, f)
         for f in os.listdir(models_path)
@@ -103,7 +103,7 @@ n_models = len(owwModel.models.keys())
 
 # Global variables
 last_detection_time = 0
-BUFFER_DURATION = 3
+BUFFER_DURATION = 5
 BUFFER_SIZE = RATE * BUFFER_DURATION
 audio_buffer = deque(maxlen=BUFFER_SIZE)
 

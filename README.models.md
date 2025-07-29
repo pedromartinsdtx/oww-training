@@ -4,8 +4,8 @@ This repository contains trained wake word detection models with their respectiv
 
 *Nota*: Para melhorar, poderia tentar usar um treinar um com o piper e com a frase Clãriss, com brs e assim tal como fiz nos outros modelos.
 
-## New models 28/07/2025
-
+# New models 28/07/2025
+> Agora há um problema qualquer no notebook personal de treino em que há um problema com o pyarrow advindo da biblioteca `datasets` (`AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'`). A solução que encontrei foi copiar o notebook e correr o notebook copiado após ter dado erro no primeiro. Estranho, mas assim funciona... (Extra: Não sei se pode estar relacionado, mas antes de correr tanto o original como o duplicado fiz um `pip install datasets==2.14.6` no terminal. Apenas meti esta informação aqui só no caso de isto eventualmente ter tido algum impacto na solução estranha que encontrei).
 
 ## New - Hey Clarisse Models
 
