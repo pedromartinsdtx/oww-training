@@ -63,7 +63,7 @@ mic_stream = audio.open(
     rate=RATE,
     input=True,
     frames_per_buffer=CHUNK,
-    # input_device_index=2, #! É preciso esta linha no Raspberry Pi para funcionar
+    # input_device_index=2, #! Era preciso esta linha no Raspberry Pi para funcionar
 )
 
 WW_MODELS_FOLDER = "models-ww"
@@ -81,7 +81,7 @@ if args.model_path != "":
     )
 else:
     inference_framework = "tflite"
-    models_path = HEY_CLARISSE_MODELS
+    models_path = OLA_CLARISSE_MODELS
     wakeword_models = [
         os.path.join(models_path, f)
         for f in os.listdir(models_path)
@@ -101,7 +101,7 @@ n_models = len(owwModel.models.keys())
 
 # Global variables
 last_detection_time = 0
-BUFFER_DURATION = 5
+BUFFER_DURATION = 3
 BUFFER_SIZE = RATE * BUFFER_DURATION
 audio_buffer = deque(maxlen=BUFFER_SIZE)
 

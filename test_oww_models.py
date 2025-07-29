@@ -13,8 +13,8 @@ ACTIVATION_THRESHOLD = 0.5
 # model.predict_clip("path/to/wav/file")
 
 # audio_folder_paths = ["samples/clarisse"]
-# audio_folder_paths = ["samples/olá-clarisse"]
-audio_folder_paths = ["samples/hei-clarisse"]
+# audio_folder_paths = ["samples/hei-clarisse"]
+audio_folder_paths = ["samples/olá-clarisse"]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
@@ -33,6 +33,15 @@ wakeword_models_paths = [
     # f"{CLARISSE_MODELS}/CLEDEESSS_v6.onnx",
     # f"{CLARISSE_MODELS}/cledeesss_v7.onnx",
     #
+    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess.onnx",
+    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess_v2.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
+    # f"{HEY_CLARISSE_MODELS}/hey_cledees-2.0.onnx",
+    # f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.1.onnx",
+    # f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.3.onnx",
+    #
     # f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
     # f"{OLA_CLARISSE_MODELS}/Ólá_Clãriss-v2-piper.onnx",
     # f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
@@ -41,16 +50,8 @@ wakeword_models_paths = [
     # f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
     # f"{OLA_CLARISSE_MODELS}/olá_cledeess-v4.onnx",
     #
-    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess.onnx",
-    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess_v2.onnx",
-    f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
-    f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
-    f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
-    f"{HEY_CLARISSE_MODELS}/hey_cledees-2.0.onnx",
-    f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.1.onnx",
-    #
 ]
-# wakeword_models_paths = glob.glob(f"{WW_MODELS_FOLDER}/*.onnx")
+wakeword_models_paths = glob.glob(f"{OLA_CLARISSE_MODELS}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
@@ -105,7 +106,7 @@ for file_path, segment_scores_list in results.items():
     for model_name, max_score in max_scores.items():
         print(f"    {model_name}: {max_score:.4f}")
 
-print("\n--- Final Report ---")
+print("\n---------------------- Final Report ---------------------------------")
 print(f"Total Files Processed: {total_files_processed}")
 print(
     f"Total Files Activated: {total_files_activated} ({(total_files_activated / total_files_processed) * 100:.2f}%)"
@@ -172,7 +173,7 @@ for file_path, segment_scores_list in false_results.items():
     # for model_name, max_score in max_scores.items():
     #     print(f"    {model_name}: {max_score:.4f}")
 
-print("\n--- False Positive Final Report ---")
+print("\n------ False Positive Final Report ------")
 print(f"Total Files Processed: {total_false_files_processed}")
 print(
     f"Total Files Activated: {total_false_files_activated} ({(total_false_files_activated / total_false_files_processed) * 100 if total_false_files_processed else 0:.2f}%)"
