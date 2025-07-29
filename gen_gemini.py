@@ -1,6 +1,12 @@
 # To run this code you need to install the following dependencies:
 # pip install google-genai
 
+"""
+Example usage:
+python3 -m services.gemini
+python3 gen_gemini.py --play-audio --phrase "pára" --iterations 20
+"""
+
 import argparse
 import json
 import mimetypes
@@ -20,8 +26,8 @@ from utils.play_audio import play_audio_file
 
 load_dotenv()
 
-# TARGET_PHRASE = "clarisse"
-TARGET_PHRASE = "pára"
+TARGET_PHRASE = "Hey clarisse!"
+# TARGET_PHRASE = "pára"
 
 parser = argparse.ArgumentParser(description="Generate voice samples using Gemini TTS")
 parser.add_argument(
@@ -43,8 +49,53 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-
 TARGET_PHRASE = args.phrase
+
+PROMPT = f"Diz apenas uma vez rapidamente a seguinte frase em português de Portugal: {TARGET_PHRASE}"
+
+GEMINI_AVAILABLE_VOICES = [
+    "Zephyr",
+    "Puck",
+    "Charon",
+    "Kore",
+    "Fenrir",
+    "Leda",
+    "Orus",
+    "Aoede",
+    "Callirrhoe",
+    "Autonoe",
+    "Enceladus",
+    "Iapetus",
+    "Umbriel",
+    "Algieba",
+    "Despina",
+    "Erinome",
+    "Algenib",
+    "Rasalgethi",
+    "Laomedeia",
+    "Achernar",
+    "Alnilam",
+    "Schedar",
+    "Gacrux",
+    "Pulcherrima",
+    "Achird",
+    "Zubenelgenubi",
+    "Vindemiatrix",
+    "Sadachbia",
+    "Sadaltager",
+    "Sulafat",
+]
+
+
+GEMINI_AVAILABLE_MODELS = [
+    "gemini-2.5-flash-preview-tts",
+    "gemini-2.5-pro-preview-tts",
+]
+
+# BASE_OUTPUT_DIR = f"samples/{TARGET_PHRASE}/gemini/clrs-gem"
+BASE_OUTPUT_DIR = "samples/hei-clarisse"
+
+os.makedirs(os.path.dirname(BASE_OUTPUT_DIR), exist_ok=True)
 
 
 def _resample_audio(
@@ -144,51 +195,6 @@ def save_binary_file(file_name, data):
     f.write(data)
     f.close()
     print(f"File saved to to: {file_name}")
-
-
-PROMPT = f"Diz apenas a palavra '{TARGET_PHRASE}', em português de Portugal."
-
-GEMINI_AVAILABLE_VOICES = [
-    "Zephyr",
-    "Puck",
-    "Charon",
-    "Kore",
-    "Fenrir",
-    "Leda",
-    "Orus",
-    "Aoede",
-    "Callirrhoe",
-    "Autonoe",
-    "Enceladus",
-    "Iapetus",
-    "Umbriel",
-    "Algieba",
-    "Despina",
-    "Erinome",
-    "Algenib",
-    "Rasalgethi",
-    "Laomedeia",
-    "Achernar",
-    "Alnilam",
-    "Schedar",
-    "Gacrux",
-    "Pulcherrima",
-    "Achird",
-    "Zubenelgenubi",
-    "Vindemiatrix",
-    "Sadachbia",
-    "Sadaltager",
-    "Sulafat",
-]
-
-
-GEMINI_AVAILABLE_MODELS = [
-    "gemini-2.5-flash-preview-tts",
-    "gemini-2.5-pro-preview-tts",
-]
-
-BASE_OUTPUT_DIR = f"samples/{TARGET_PHRASE}/gemini/clrs-gem"
-os.makedirs(os.path.dirname(BASE_OUTPUT_DIR), exist_ok=True)
 
 
 def generate_gemini_voice(
