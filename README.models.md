@@ -9,19 +9,25 @@ This repository contains trained wake word detection models with their respectiv
 
 ## New - Hey Clarisse Models
 
-| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy  | Recall | False Positives per Hour | Notes                               |
-| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | --------- | ------ | ------------------------ | ----------------------------------- |
-| Hey_Clãriss-2.4  | 40000            | 20000          | 3500                     | 1000               | -         | -      | -                        | Hey_Clãriss (in training)           |
-| Hey_Clãriss-2.3  | 10000            | 20000          | (default)                | 1000               | 0.73      | 0.46   | 0.44                     | Hey_Clãriss                         |
-| hey_cledeess-2.2 | 40000            | 20000          | 3500                     | 500                | ?         | -      | ?                        | Google Colab (simple) (in training) |
-| hey_cledeess-2.1 | 40000            | 20000          | 5000                     | 500                | *(78.07%) | -      | *(1.92%)                 | Google Colab (simple)               |
-| hey_cledees-2.0  | 40000            | 20000          | 1500                     | 500                | *(73.80%) | -      | *(3.85%)                 | Google Colab (simple)               |
+| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy  | Recall | False Positives per Hour | Notes                 |
+| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | --------- | ------ | ------------------------ | --------------------- |
+| Hey_Clãriss-2.5  | 35000            | 20000          | 3000                     | 1000               | 0.73      | 0.47   | 0.00                     | Hey_Clãriss           |
+| Hey_Clãriss-2.4  | 25000            | 20000          | 3000                     | 1000               | *(76.86%) | -      | *(3.85%)                 | Hey_Clãriss           |
+| Hey_Clãriss-2.3  | 10000            | 20000          | (default)                | 1000               | 0.73      | 0.46   | 0.44                     | Hey_Clãriss           |
+| hey_cledeess-2.2 | 40000            | 20000          | 3500                     | 500                | *(73.14%) | -      | *(1.92%)                 | Google Colab (simple) |
+| hey_cledeess-2.1 | 40000            | 20000          | 5000                     | 500                | *(75.62%) | -      | *(1.92%)                 | Google Colab (simple) |
+| hey_cledees-2.0  | 40000            | 20000          | 1500                     | 500                | *(70.66%) | -      | *(3.85%)                 | Google Colab (simple) |
+
 
 ## New - Olá Clarisse Models
 
-| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                 |
-| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------- |
-| olá_cledeess-2.0 | 40000            | 20000          | 5000                     | 500                | -        | -      | -                        | Google Colab (simple) |
+| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                               |
+| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------------------- |
+| olá_cledeess-2.1 | 40000            | 20000          | 2500                     | 500                | *??      | -      | *??                      | Google Colab (simple) "ólá_cledeess!" (in training) |
+| olá_cledeess-2.0 | 40000            | 20000          | 5000                     | 500                | -        | -      | -                        | Google Colab (simple)                               |
+
+
+---
 
 
 ## Olá Clarisse Models
