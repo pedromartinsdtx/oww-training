@@ -8,9 +8,7 @@ import numpy as np
 import pyaudio
 import simpleaudio as sa
 from openwakeword.model import Model
-from scipy import signal
 
-# Parse input arguments
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--chunk_size",
@@ -49,13 +47,13 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+ACTIVATION_THRESHOLD = 0.5
+
 # Audio Configuration
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
-RATE = 48000
-TARGET_RATE = 16000
+RATE = 16000
 CHUNK = args.chunk_size
-downsample_ratio = RATE // TARGET_RATE
 
 # Initialize PyAudio
 audio = pyaudio.PyAudio()
@@ -110,8 +108,8 @@ audio_buffer = deque(maxlen=BUFFER_SIZE)
 
 def save_audio_buffer(score, filename=None):
     if filename is None:
-        timestamp = time.strftime("%m%d_%H%M%S")
-        filename = f"ww_{timestamp}_{score}.wav"
+        timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+        filename = f"{timestamp}_local_wakeword_trigger.wav"
 
     os.makedirs("logs/test-detect-mic", exist_ok=True)
     filepath = os.path.join("logs/test-detect-mic", filename)
@@ -123,6 +121,8 @@ def save_audio_buffer(score, filename=None):
         wav_file.setsampwidth(audio.get_sample_size(FORMAT))
         wav_file.setframerate(RATE)
         wav_file.writeframes(audio_data.tobytes())
+
+    audio_buffer.clear()
 
     return filepath
 
@@ -179,11 +179,7 @@ if __name__ == "__main__":
         # Add raw audio to buffer for saving
         audio_buffer.extend(audio_data_np)
 
-        audio_float = audio_data_np.astype(np.float32)
-        downsampled = signal.decimate(audio_float, downsample_ratio, ftype="iir")
-        audio_16k = downsampled.astype(np.int16)
-
-        prediction = owwModel.predict(audio_16k)
+        prediction = owwModel.predict(audio_data_np)
 
         n_spaces = 16
         output_string_header = (
@@ -195,12 +191,10 @@ if __name__ == "__main__":
             scores = list(owwModel.prediction_buffer[mdl])
             curr_score = format(scores[-1], ".3f").replace("-", "")
 
-            if scores[-1] > 0.5:
+            if scores[-1] > ACTIVATION_THRESHOLD:
                 wakeword_status = "Wakeword Detected!"
                 with open(ww_trigger_log_path, "a") as log_file:
-                    log_entry = (
-                        f"Model: {mdl}, Time: {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
-                    )
+                    log_entry = f"Model: {mdl}, Score: {curr_score}, Time: {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
                     with open(ww_trigger_log_path, "r+") as log_file:
                         existing_entries = log_file.readlines()
                         if log_entry not in existing_entries:

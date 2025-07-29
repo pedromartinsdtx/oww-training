@@ -1,6 +1,5 @@
 import glob
 
-from openwakeword.model import Model
 from openwakeword.utils import bulk_predict
 
 WW_MODELS_FOLDER = "models-ww"
@@ -11,7 +10,6 @@ PARA_MODELS = f"{WW_MODELS_FOLDER}/para"
 
 ACTIVATION_THRESHOLD = 0.5
 
-model = Model()
 # model.predict_clip("path/to/wav/file")
 
 # audio_folder_paths = ["samples/clarisse"]

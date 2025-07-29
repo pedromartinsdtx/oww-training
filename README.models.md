@@ -11,6 +11,7 @@ This repository contains trained wake word detection models with their respectiv
 
 | Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy  | Recall | False Positives per Hour | Notes                 |
 | ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | --------- | ------ | ------------------------ | --------------------- |
+| hey_cledeess-2.2 | 40000            | 20000          | 3500                     | 500                | ?         | -      | ?                        | Google Colab (simple) |
 | hey_cledeess-2.1 | 40000            | 20000          | 5000                     | 500                | *(78.07%) | -      | *(1.92%)                 | Google Colab (simple) |
 | hey_cledees-2.0  | 40000            | 20000          | 1500                     | 500                | *(73.80%) | -      | *(3.85%)                 | Google Colab (simple) |
 
