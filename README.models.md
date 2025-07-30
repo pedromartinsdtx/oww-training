@@ -5,7 +5,13 @@ This repository contains trained wake word detection models with their respectiv
 *Nota*: Para melhorar, poderia tentar usar um treinar um com o piper e com a frase Clãriss, com brs e assim tal como fiz nos outros modelos.
 
 # New models 28/07/2025
-> Agora há um problema qualquer no notebook personal de treino em que há um problema com o pyarrow advindo da biblioteca `datasets` (`AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'`). A solução que encontrei foi copiar o notebook e correr o notebook copiado após ter dado erro no primeiro. Estranho, mas assim funciona... (Extra: Não sei se pode estar relacionado, mas antes de correr tanto o original como o duplicado fiz um `pip install datasets==2.14.6` no terminal. Apenas meti esta informação aqui só no caso de isto eventualmente ter tido algum impacto na solução estranha que encontrei).
+> Agora há um problema qualquer no notebook personal de treino em que há um problema com o pyarrow advindo da biblioteca `datasets` (`AttributeError: module 'pyarrow' has no attribute 'PyExtensionType'`). A solução que encontrei foi correr estes comandos antes de abrir o jupyter notebook de treino:
+> ```sh
+> apt-get update && apt-get install -y build-essential
+> sudo apt install nvidia-cuda-toolkit -y
+> echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+> source ~/.bashrc
+> ```
 
 ## New - Hey Clarisse Models
 
@@ -23,7 +29,8 @@ This repository contains trained wake word detection models with their respectiv
 
 | Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                               |
 | ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------------------- |
-| olá_cledeess-2.1 | 40000            | 20000          | 2500                     | 500                | *??      | -      | *??                      | Google Colab (simple) "ólá_cledeess!" (in training) |
+| olá_clãriss-2.2  | 35000            | 20000          | 3000                     | 1000               | *??      | -      | *??                      | Ólá Clãriss ; Olá Clãriss (in training)             |
+| olá_cledeess-2.1 | 40000            | 20000          | 3000                     | 500                | *??      | -      | *??                      | Google Colab (simple) "ólá_cledeess!" (in training) |
 | olá_cledeess-2.0 | 40000            | 20000          | 5000                     | 500                | -        | -      | -                        | Google Colab (simple)                               |
 
 
