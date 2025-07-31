@@ -10,51 +10,55 @@ PARA_MODELS = f"{WW_MODELS_FOLDER}/para"
 
 ACTIVATION_THRESHOLD = 0.5
 
-# model.predict_clip("path/to/wav/file")
+BASE = "hey"
+# BASE = "ola"
 
-# audio_folder_paths = ["samples/clarisse"]
-# audio_folder_paths = ["samples/hei-clarisse"]
-audio_folder_paths = ["samples/olá-clarisse"]
+if BASE == "ola":
+    audio_folder_paths = ["samples/olá-clarisse"]
+    wakeword_models_paths = glob.glob(f"{OLA_CLARISSE_MODELS}/*.onnx")
+elif BASE == "hey":
+    audio_folder_paths = ["samples/hei-clarisse"]
+    wakeword_models_paths = glob.glob(f"{HEY_CLARISSE_MODELS}/*.onnx")
+
+# wakeword_models_paths = [
+# f"{CLARISSE_MODELS}/Clarisse_v-piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v1.2-piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v2_piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v2.5_piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v3_piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v4_piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v5_piper.onnx",
+# f"{CLARISSE_MODELS}/Clarisse_v6_piper.onnx",
+# f"{CLARISSE_MODELS}/CLEDEESSS_v5.onnx",
+# f"{CLARISSE_MODELS}/CLEDEESSS_v6.onnx",
+# f"{CLARISSE_MODELS}/cledeesss_v7.onnx",
+#
+# f"{HEY_CLARISSE_MODELS}/eeii_cleddeess.onnx",
+# f"{HEY_CLARISSE_MODELS}/eeii_cleddeess_v2.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
+# f"{HEY_CLARISSE_MODELS}/hey_cledees-2.0.onnx",
+# f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.1.onnx",
+# f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.2.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.3.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.4.onnx",
+# f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.5.onnx",
+#
+# f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
+# f"{OLA_CLARISSE_MODELS}/Ólá_Clãriss-v2-piper.onnx",
+# f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
+# f"{OLA_CLARISSE_MODELS}/olá_cleddeess.onnx",
+# f"{OLA_CLARISSE_MODELS}/olá_cleddeess-v2.onnx",
+# f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
+# f"{OLA_CLARISSE_MODELS}/olá_cledeess-v4.onnx",
+#
+# ]
 
 audio_file_paths = []
 for folder in audio_folder_paths:
     audio_file_paths.extend(glob.glob(f"{folder}/**/*.wav", recursive=True))
 
-wakeword_models_paths = [
-    # f"{CLARISSE_MODELS}/Clarisse_v-piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v1.2-piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v2_piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v2.5_piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v3_piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v4_piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v5_piper.onnx",
-    # f"{CLARISSE_MODELS}/Clarisse_v6_piper.onnx",
-    # f"{CLARISSE_MODELS}/CLEDEESSS_v5.onnx",
-    # f"{CLARISSE_MODELS}/CLEDEESSS_v6.onnx",
-    # f"{CLARISSE_MODELS}/cledeesss_v7.onnx",
-    #
-    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess.onnx",
-    # f"{HEY_CLARISSE_MODELS}/eeii_cleddeess_v2.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1_piper.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v1.2_piper.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clariss_v2_piper.onnx",
-    # f"{HEY_CLARISSE_MODELS}/hey_cledees-2.0.onnx",
-    # f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.1.onnx",
-    # f"{HEY_CLARISSE_MODELS}/hey_cledeess-2.2.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.3.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.4.onnx",
-    # f"{HEY_CLARISSE_MODELS}/Hey_Clãriss-2.5.onnx",
-    #
-    # f"{OLA_CLARISSE_MODELS}/Olá_Clãriss-v1-piper.onnx",
-    # f"{OLA_CLARISSE_MODELS}/Ólá_Clãriss-v2-piper.onnx",
-    # f"{OLA_CLARISSE_MODELS}/holá_cleddeess.onnx",
-    # f"{OLA_CLARISSE_MODELS}/olá_cleddeess.onnx",
-    # f"{OLA_CLARISSE_MODELS}/olá_cleddeess-v2.onnx",
-    # f"{OLA_CLARISSE_MODELS}/olá_cledeess-v3.onnx",
-    # f"{OLA_CLARISSE_MODELS}/olá_cledeess-v4.onnx",
-    #
-]
-wakeword_models_paths = glob.glob(f"{OLA_CLARISSE_MODELS}/*.onnx")
 
 # Get audio data containing 16-bit 16khz PCM audio data from a file, microphone, network stream, etc.
 # For the best efficiency and latency, audio frames should be multiples of 80 ms, with longer frames
