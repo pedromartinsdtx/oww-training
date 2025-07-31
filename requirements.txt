@@ -107,7 +107,7 @@ onnx-tf==1.10.0
 onnx2tf==1.28.2
 onnx_graphsurgeon==0.5.8
 onnxruntime==1.22.1
-onnxruntime-gpu==1.20.0
+onnxruntime-gpu==1.19.2
 -e git+https://github.com/Katilho/openwakeword@6fa61c7252cb17679dad45d16397f0eff931cac4#egg=openwakeword
 optree==0.13.0
 overrides==7.7.0
