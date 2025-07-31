@@ -12,6 +12,8 @@ This repository contains trained wake word detection models with their respectiv
 > echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 > source ~/.bashrc
 > ```
+> 31/07/2025
+> Aparentemente isto tbm não é suficiente, não consigo perceber muito bem o que se passa, desta vez reparei que o que fiz desde uma altura que não dava para a altura que atualmente dá, foi fazer um `sudo apt full-upgrade -y` e dar shutdown de todos os kernels através do botão na tree que indica `Shut Down All`. Tecnicamente também fiz um `Run Selected Cell And All Below` instead of a `Run All` no jupyter notebook.
 
 ## New - Hey Clarisse Models
 
@@ -27,11 +29,11 @@ This repository contains trained wake word detection models with their respectiv
 
 ## New - Olá Clarisse Models
 
-| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                               |
-| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------------------- |
-| olá_clãriss-2.2  | 35000            | 20000          | 3000                     | 1000               | *??      | -      | *??                      | Ólá Clãriss ; Olá Clãriss (in training)             |
-| olá_cledeess-2.1 | 40000            | 20000          | 3000                     | 500                | *??      | -      | *??                      | Google Colab (simple) "ólá_cledeess!" (in training) |
-| olá_cledeess-2.0 | 40000            | 20000          | 5000                     | 500                | -        | -      | -                        | Google Colab (simple)                               |
+| Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy | Recall | False Positives per Hour | Notes                                   |
+| ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | -------- | ------ | ------------------------ | --------------------------------------- |
+| olá_clãriss-2.2  | 35000            | 20000          | 3000                     | 1000               | *??      | -      | *??                      | Ólá Clãriss ; Olá Clãriss (in training) |
+| olá_cledeess-2.1 | 40000            | 20000          | 3000                     | 500                | *??      | -      | *??                      | Google Colab (simple) "ólá_cledeess!"   |
+| olá_cledeess-2.0 | 40000            | 20000          | 5000                     | 500                | -        | -      | -                        | Google Colab (simple)                   |
 
 
 ---
