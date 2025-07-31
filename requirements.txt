@@ -1,3 +1,4 @@
+# Result from pip freeze removing some lines that refered to local files that made fail the build
 absl-py==2.3.1
 acoustics==0.2.6
 aiohappyeyeballs==2.6.1
