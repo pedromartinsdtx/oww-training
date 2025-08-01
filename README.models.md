@@ -16,11 +16,11 @@ This repository contains trained wake word detection models with their respectiv
 > Aparentemente isto tbm não é suficiente, não consigo perceber muito bem o que se passa, desta vez reparei que o que fiz desde uma altura que não dava para a altura que atualmente dá, foi fazer um `sudo apt full-upgrade -y` e dar shutdown de todos os kernels através do botão na tree que indica `Shut Down All`. Tecnicamente também fiz um `Run Selected Cell And All Below` instead of a `Run All` no jupyter notebook.
 
 
-
 ## New - Hey Clarisse Models
 
 | Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy  | Recall | False Positives per Hour | Notes                 |
 | ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | --------- | ------ | ------------------------ | --------------------- |
+| Hey_Clãriss-2.7  | 35000            | 25000          | 3000                     | 2000               | 0.75      | 0.49   | 0.00                     | Hey_Clãriss           |
 | Hey_Clãriss-2.6  | 50000            | 20000          | 3000                     | 2000               | 0.70      | 0.41   | 0.09                     | Hey_Clãriss           |
 | Hey_Clãriss-2.5  | 35000            | 20000          | 3000                     | 1000               | 0.73      | 0.47   | 0.00                     | Hey_Clãriss           |
 | Hey_Clãriss-2.4  | 25000            | 20000          | 3000                     | 1000               | *(76.86%) | -      | *(3.85%)                 | Hey_Clãriss           |

@@ -9,7 +9,10 @@ cp /opt/conda/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_adv.so.9 /o
 ```
 
 
-
+Useful command for its notebook
+```sh
+grep -E "(=== Training combination|Final Model Accuracy|Final Model Recall|Final Model False Positives|Saving ONNX|N_samples)" output.txt
+```
 
 
 
