@@ -20,6 +20,7 @@ This repository contains trained wake word detection models with their respectiv
 
 | Model Name       | Training Samples | Training Steps | False Activation Penalty | Validation Samples | Accuracy  | Recall | False Positives per Hour | Notes                     |
 | ---------------- | ---------------- | -------------- | ------------------------ | ------------------ | --------- | ------ | ------------------------ | ------------------------- |
+| Hey_Clãriss-3.3  | 40000            | 30000          | 3000                     | 2000               | 0.78      | 0.56   | 0.18                     | Hey_Clãriss               |
 | Hey_Clãriss-3.2  | 40000            | 100000         | 5000                     | 2000               | 0.73      | 0.46   | 0.09                     | Hey_Clãriss (in training) |
 | Hey_Clãriss-3.2  | 35000            | 50000          | 4000                     | 2000               | 0.73      | 0.46   | 0.09                     | Hey_Clãriss               |
 | Hey_Clãriss-3.1  | 35000            | 25000          | 3000                     | 2000               | 0.76      | 0.52   | 0.17                     | Hey_Clãriss               |
