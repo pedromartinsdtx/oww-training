@@ -1,0 +1,1537 @@
+Total combinations to train: 4
+
+=== Training combination 1/4 ===
+N_samples: 50000, Steps: 30000, Max_negative_weight: 3000
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+Downloading from: https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx
+Saving to: models/pt_PT-tugão-medium.onnx
+✓ Successfully downloaded pt_PT-tugão-medium.onnx
+Downloading from: https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_PT/tugão/medium/pt_PT-tugão-medium.onnx.json
+Saving to: models/pt_PT-tugão-medium.onnx.json
+✓ Successfully downloaded pt_PT-tugão-medium.onnx.json
+Ensuring voice exists: pt_PT-tugão-medium
+✓ Voice 'pt_PT-tugão-medium' is ready.
+Ensuring voice exists: es_MX-claude-high
+INFO:piper.download:Downloaded models/es_MX-claude-high.onnx.json (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/es/es_MX/claude/high/es_MX-claude-high.onnx.json)
+INFO:piper.download:Downloaded models/es_MX-claude-high.onnx (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/es/es_MX/claude/high/es_MX-claude-high.onnx)
+✓ Voice 'es_MX-claude-high' is ready.
+Ensuring voice exists: pt_BR-cadu-medium
+INFO:piper.download:Downloaded models/pt_BR-cadu-medium.onnx (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_BR/cadu/medium/pt_BR-cadu-medium.onnx)
+INFO:piper.download:Downloaded models/pt_BR-cadu-medium.onnx.json (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_BR/cadu/medium/pt_BR-cadu-medium.onnx.json)
+✓ Voice 'pt_BR-cadu-medium' is ready.
+Ensuring voice exists: pt_BR-faber-medium
+INFO:piper.download:Downloaded models/pt_BR-faber-medium.onnx (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx)
+INFO:piper.download:Downloaded models/pt_BR-faber-medium.onnx.json (https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/pt/pt_BR/faber/medium/pt_BR-faber-medium.onnx.json)
+✓ Voice 'pt_BR-faber-medium' is ready.
+Ensuring voice exists: pt_PT-rita
+✗ Voice 'pt_PT-rita' not found in voices.json. Checking local models...
+✓ Found local model: models/pt_PT-rita.onnx
+✓ Successfully loaded local model 'pt_PT-rita'
+✅ Loaded 5 voice(s)
+  0: pt
+  1: es-419
+  2: pt-br
+  3: pt-br
+  4: pt
+INFO:root:##################################################
+Generating positive clips for training
+##################################################
+INFO:piper_gen:Pre-generating random parameters...
+INFO:piper_gen:Starting generation of 50000 samples using GPU...
+Generating samples: 100%|█████████████████| 50000/50000 [38:50<00:00, 21.46it/s]
+INFO:piper_gen:Generation complete! Successful: 50000, Failed: 0
+INFO:root:##################################################
+Generating positive clips for testing
+##################################################
+INFO:piper_gen:Pre-generating random parameters...
+INFO:piper_gen:Starting generation of 2000 samples using GPU...
+Generating samples: 100%|███████████████████| 2000/2000 [00:45<00:00, 44.00it/s]
+INFO:piper_gen:Generation complete! Successful: 2000, Failed: 0
+INFO:root:##################################################
+Generating negative clips for training
+##################################################
+WARNING:root:Downloading phonemizer model from DeepPhonemizer library...
+/opt/conda/lib/python3.11/site-packages/torch/nn/modules/transformer.py:379: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True(use batch_first for better inference performance)
+  warnings.warn(
+WARNING:root:The word 'Clãriss' was not found in the pronunciation dictionary! Using the DeepPhonemizer library to predict the phonemes.
+WARNING:root:Phones for 'Clãriss': [K][L][R][IH][S]
+INFO:generate_samples:Successfully loaded the model
+INFO:generate_samples:Done
+INFO:root:##################################################
+Generating negative clips for testing
+##################################################
+WARNING:root:The word 'Clãriss' was not found in the pronunciation dictionary! Using the DeepPhonemizer library to predict the phonemes.
+WARNING:root:Phones for 'Clãriss': [K][L][R][IH][S]
+INFO:generate_samples:Successfully loaded the model
+INFO:generate_samples:Done
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Computing openwakeword features for generated samples
+##################################################
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = PitchShift(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = BandStopFilter(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddColoredNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddBackgroundNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Gain(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/composition.py:42: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Compose(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/audiomentations/core/transforms_interface.py:61: UserWarning: Warning: input samples dtype is np.float64. Converting to np.float32
+  warnings.warn(
+Computing features: 100%|██████████████████▉| 3124/3125 [06:17<00:00,  8.28it/s]
+Trimming empty rows: 49it [00:00, 93.66it/s]                                    
+Computing features: 100%|██████████████████▉| 3124/3125 [06:24<00:00,  8.12it/s]
+Trimming empty rows: 49it [00:01, 37.25it/s]                                    
+Computing features:  99%|████████████████████▊| 124/125 [00:14<00:00,  8.38it/s]
+Trimming empty rows: 2it [00:00, 33.07it/s]                                     
+Computing features:  99%|████████████████████▊| 124/125 [00:14<00:00,  8.47it/s]
+Trimming empty rows: 2it [00:00, 33.77it/s]                                     
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Starting training sequence 1...
+##################################################
+Training: 100%|██████████████████████████▉| 29999/30000 [06:38<00:00, 75.22it/s]
+INFO:root:##################################################
+Starting training sequence 2...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 2999/3000.0 [03:03<00:00, 16.39it/s]
+INFO:root:##################################################
+Starting training sequence 3...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 2999/3000.0 [02:56<00:00, 16.98it/s]
+INFO:root:Merging checkpoints above the 90th percentile into single model...
+INFO:root:
+################
+Final Model Accuracy: 0.753250002861023
+Final Model Recall: 0.5070000290870667
+Final Model False Positives per Hour: 1.0619468688964844
+################
+
+INFO:root:####
+Saving ONNX mode as '/workspace/combs/final_result/Hey_Clãriss_n50000_s30000_w3000.onnx'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1754253022.207361  760951 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1754253022.214337  760951 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1754253022.231664  760951 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754253022.231694  760951 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754253022.231698  760951 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754253022.231701  760951 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+Model optimizing started ============================================================
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 14             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 200.6KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Model optimizing complete!
+
+Automatic generation of each OP name started ========================================
+Automatic generation of each OP name complete!
+
+Model loaded ========================================================================
+
+Model conversion started ============================================================
+INFO: input_op_name: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+
+INFO: 2 / 26
+INFO: onnx_op_type: Flatten onnx_op_name: /flatten/Flatten
+INFO:  input_name.1: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+INFO:  output_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO: tf_op_type: reshape
+INFO:  input.1.tensor: name: onnx____Flatten_0 shape: (1, 16, 96) dtype: <dtype: 'float32'> 
+INFO:  input.2.shape: val: [1, 1536] 
+INFO:  output.1.output: name: tf.reshape/Reshape:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+
+INFO: 3 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /layer1/Gemm
+INFO:  input_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO:  input_name.2: layer1.weight shape: [32, 1536] dtype: float32
+INFO:  input_name.3: layer1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1536, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 4 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 5 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /layernorm1/Sub
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 6 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /layernorm1/Pow
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 7 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean_1
+INFO:  input_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 8 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add
+INFO:  input_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 9 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /layernorm1/Sqrt
+INFO:  input_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 10 / 26
+INFO: onnx_op_type: Div onnx_op_name: /layernorm1/Div
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 11 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /layernorm1/Mul
+INFO:  input_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.weight shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 12 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add_1
+INFO:  input_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 13 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /relu1/Relu
+INFO:  input_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 14 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /blocks.0/fcn_layer/Gemm
+INFO:  input_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.fcn_layer.weight shape: [32, 32] dtype: float32
+INFO:  input_name.3: blocks.0.fcn_layer.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 15 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 16 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /blocks.0/layer_norm/Sub
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 17 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /blocks.0/layer_norm/Pow
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 18 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean_1
+INFO:  input_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 19 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add
+INFO:  input_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 20 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /blocks.0/layer_norm/Sqrt
+INFO:  input_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 21 / 26
+INFO: onnx_op_type: Div onnx_op_name: /blocks.0/layer_norm/Div
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 22 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /blocks.0/layer_norm/Mul
+INFO:  input_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.weight shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 23 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add_1
+INFO:  input_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 24 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /blocks.0/relu/Relu
+INFO:  input_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu_1/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 25 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /last_layer/Gemm
+INFO:  input_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: last_layer.weight shape: [1, 32] dtype: float32
+INFO:  input_name.3: last_layer.bias shape: [1] dtype: float32
+INFO:  output_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 1) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (1,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 26 / 26
+INFO: onnx_op_type: Sigmoid onnx_op_name: /last_act/Sigmoid
+INFO:  input_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: 39 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sigmoid
+INFO:  input.1.x: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sigmoid/Sigmoid:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+saved_model output started ==========================================================
+Saved artifact at 'final_result/'. The following endpoints are available:
+
+* Endpoint 'serving_default'
+  inputs_0 (POSITIONAL_ONLY): TensorSpec(shape=(1, 16, 96), dtype=tf.float32, name='onnx____Flatten_0')
+Output Type:
+  TensorSpec(shape=(1, 1), dtype=tf.float32, name=None)
+Captures:
+  138943388598928: TensorSpec(shape=(1536, 32), dtype=tf.float32, name=None)
+  138945615178320: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  138943388602192: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  138943388600080: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  138943388605072: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  138943388603536: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  138943388602576: TensorSpec(shape=(32, 32), dtype=tf.float32, name=None)
+  138943388603152: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  138943388602960: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  138943388605648: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  138943388604688: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  138943388603344: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  138943388604304: TensorSpec(shape=(32, 1), dtype=tf.float32, name=None)
+  138943388602768: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  138943388602384: TensorSpec(shape=(1,), dtype=tf.float32, name=None)
+saved_model output complete!
+I0000 00:00:1754253026.833835  760951 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1754253026.834244  760951 single_machine.cc:374] Starting new session
+W0000 00:00:1754253026.999998  760951 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754253027.000043  760951 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float32 tflite output complete!
+I0000 00:00:1754253027.063487  760951 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+I0000 00:00:1754253027.063863  760951 single_machine.cc:374] Starting new session
+W0000 00:00:1754253027.219038  760951 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754253027.219092  760951 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float16 tflite output complete!
+
+=== Training combination 2/4 ===
+N_samples: 50000, Steps: 35000, Max_negative_weight: 3000
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+✓ pt_PT-tugão-medium.onnx already exists, skipping download
+✓ pt_PT-tugão-medium.onnx.json already exists, skipping download
+Ensuring voice exists: pt_PT-tugão-medium
+✓ Voice 'pt_PT-tugão-medium' is ready.
+Ensuring voice exists: es_MX-claude-high
+✓ Voice 'es_MX-claude-high' is ready.
+Ensuring voice exists: pt_BR-cadu-medium
+✓ Voice 'pt_BR-cadu-medium' is ready.
+Ensuring voice exists: pt_BR-faber-medium
+✓ Voice 'pt_BR-faber-medium' is ready.
+Ensuring voice exists: pt_PT-rita
+✗ Voice 'pt_PT-rita' not found in voices.json. Checking local models...
+✓ Found local model: models/pt_PT-rita.onnx
+✓ Successfully loaded local model 'pt_PT-rita'
+✅ Loaded 5 voice(s)
+  0: pt
+  1: es-419
+  2: pt-br
+  3: pt-br
+  4: pt
+INFO:root:##################################################
+Generating positive clips for training
+##################################################
+WARNING:root:Skipping generation of positive clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating positive clips for testing
+##################################################
+WARNING:root:Skipping generation of positive clips testing, as ~2000 already exist
+INFO:root:##################################################
+Generating negative clips for training
+##################################################
+WARNING:root:Skipping generation of negative clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating negative clips for testing
+##################################################
+WARNING:root:Skipping generation of negative clips for testing, as ~2000 already exist
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Computing openwakeword features for generated samples
+##################################################
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = PitchShift(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = BandStopFilter(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddColoredNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddBackgroundNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Gain(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/composition.py:42: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Compose(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/audiomentations/core/transforms_interface.py:61: UserWarning: Warning: input samples dtype is np.float64. Converting to np.float32
+  warnings.warn(
+Computing features: 100%|██████████████████▉| 3124/3125 [06:07<00:00,  8.51it/s]
+Trimming empty rows: 49it [00:00, 85.36it/s]                                    
+Computing features: 100%|██████████████████▉| 3124/3125 [05:58<00:00,  8.71it/s]
+Trimming empty rows: 49it [00:01, 32.03it/s]                                    
+Computing features:  99%|████████████████████▊| 124/125 [00:15<00:00,  8.11it/s]
+Trimming empty rows: 2it [00:00, 32.54it/s]                                     
+Computing features:  99%|████████████████████▊| 124/125 [00:12<00:00,  9.77it/s]
+Trimming empty rows: 2it [00:00, 29.01it/s]                                     
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Starting training sequence 1...
+##################################################
+Training: 100%|██████████████████████████▉| 34999/35000 [07:07<00:00, 81.84it/s]
+INFO:root:##################################################
+Starting training sequence 2...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 3499/3500.0 [03:36<00:00, 16.16it/s]
+INFO:root:##################################################
+Starting training sequence 3...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 3499/3500.0 [02:59<00:00, 19.49it/s]
+INFO:root:Merging checkpoints above the 90th percentile into single model...
+INFO:root:
+################
+Final Model Accuracy: 0.6977499723434448
+Final Model Recall: 0.3955000042915344
+Final Model False Positives per Hour: 0.17699114978313446
+################
+
+INFO:root:####
+Saving ONNX mode as '/workspace/combs/final_result/Hey_Clãriss_n50000_s35000_w3000.onnx'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1754254683.622355 1523476 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1754254683.628856 1523476 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1754254683.646590 1523476 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754254683.646620 1523476 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754254683.646623 1523476 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754254683.646628 1523476 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+Model optimizing started ============================================================
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 14             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 200.6KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Model optimizing complete!
+
+Automatic generation of each OP name started ========================================
+Automatic generation of each OP name complete!
+
+Model loaded ========================================================================
+
+Model conversion started ============================================================
+INFO: input_op_name: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+
+INFO: 2 / 26
+INFO: onnx_op_type: Flatten onnx_op_name: /flatten/Flatten
+INFO:  input_name.1: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+INFO:  output_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO: tf_op_type: reshape
+INFO:  input.1.tensor: name: onnx____Flatten_0 shape: (1, 16, 96) dtype: <dtype: 'float32'> 
+INFO:  input.2.shape: val: [1, 1536] 
+INFO:  output.1.output: name: tf.reshape/Reshape:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+
+INFO: 3 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /layer1/Gemm
+INFO:  input_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO:  input_name.2: layer1.weight shape: [32, 1536] dtype: float32
+INFO:  input_name.3: layer1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1536, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 4 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 5 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /layernorm1/Sub
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 6 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /layernorm1/Pow
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 7 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean_1
+INFO:  input_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 8 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add
+INFO:  input_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 9 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /layernorm1/Sqrt
+INFO:  input_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 10 / 26
+INFO: onnx_op_type: Div onnx_op_name: /layernorm1/Div
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 11 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /layernorm1/Mul
+INFO:  input_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.weight shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 12 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add_1
+INFO:  input_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 13 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /relu1/Relu
+INFO:  input_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 14 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /blocks.0/fcn_layer/Gemm
+INFO:  input_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.fcn_layer.weight shape: [32, 32] dtype: float32
+INFO:  input_name.3: blocks.0.fcn_layer.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 15 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 16 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /blocks.0/layer_norm/Sub
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 17 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /blocks.0/layer_norm/Pow
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 18 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean_1
+INFO:  input_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 19 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add
+INFO:  input_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 20 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /blocks.0/layer_norm/Sqrt
+INFO:  input_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 21 / 26
+INFO: onnx_op_type: Div onnx_op_name: /blocks.0/layer_norm/Div
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 22 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /blocks.0/layer_norm/Mul
+INFO:  input_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.weight shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 23 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add_1
+INFO:  input_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 24 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /blocks.0/relu/Relu
+INFO:  input_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu_1/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 25 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /last_layer/Gemm
+INFO:  input_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: last_layer.weight shape: [1, 32] dtype: float32
+INFO:  input_name.3: last_layer.bias shape: [1] dtype: float32
+INFO:  output_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 1) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (1,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 26 / 26
+INFO: onnx_op_type: Sigmoid onnx_op_name: /last_act/Sigmoid
+INFO:  input_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: 39 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sigmoid
+INFO:  input.1.x: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sigmoid/Sigmoid:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+saved_model output started ==========================================================
+Saved artifact at 'final_result/'. The following endpoints are available:
+
+* Endpoint 'serving_default'
+  inputs_0 (POSITIONAL_ONLY): TensorSpec(shape=(1, 16, 96), dtype=tf.float32, name='onnx____Flatten_0')
+Output Type:
+  TensorSpec(shape=(1, 1), dtype=tf.float32, name=None)
+Captures:
+  127549079505040: TensorSpec(shape=(1536, 32), dtype=tf.float32, name=None)
+  127549079505424: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  127549079506768: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  127549079505232: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  127549079509648: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  127549079508112: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  127549079507152: TensorSpec(shape=(32, 32), dtype=tf.float32, name=None)
+  127549079507728: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  127549079507536: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  127549079510224: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  127549079509264: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  127549079507920: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  127549079508880: TensorSpec(shape=(32, 1), dtype=tf.float32, name=None)
+  127549079507344: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  127549079506960: TensorSpec(shape=(1,), dtype=tf.float32, name=None)
+saved_model output complete!
+I0000 00:00:1754254688.333929 1523476 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1754254688.334335 1523476 single_machine.cc:374] Starting new session
+W0000 00:00:1754254688.498056 1523476 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754254688.498105 1523476 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float32 tflite output complete!
+I0000 00:00:1754254688.560320 1523476 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+I0000 00:00:1754254688.560663 1523476 single_machine.cc:374] Starting new session
+W0000 00:00:1754254688.731959 1523476 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754254688.732011 1523476 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float16 tflite output complete!
+
+=== Training combination 3/4 ===
+N_samples: 50000, Steps: 40000, Max_negative_weight: 3000
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+✓ pt_PT-tugão-medium.onnx already exists, skipping download
+✓ pt_PT-tugão-medium.onnx.json already exists, skipping download
+Ensuring voice exists: pt_PT-tugão-medium
+✓ Voice 'pt_PT-tugão-medium' is ready.
+Ensuring voice exists: es_MX-claude-high
+✓ Voice 'es_MX-claude-high' is ready.
+Ensuring voice exists: pt_BR-cadu-medium
+✓ Voice 'pt_BR-cadu-medium' is ready.
+Ensuring voice exists: pt_BR-faber-medium
+✓ Voice 'pt_BR-faber-medium' is ready.
+Ensuring voice exists: pt_PT-rita
+✗ Voice 'pt_PT-rita' not found in voices.json. Checking local models...
+✓ Found local model: models/pt_PT-rita.onnx
+✓ Successfully loaded local model 'pt_PT-rita'
+✅ Loaded 5 voice(s)
+  0: pt
+  1: es-419
+  2: pt-br
+  3: pt-br
+  4: pt
+INFO:root:##################################################
+Generating positive clips for training
+##################################################
+WARNING:root:Skipping generation of positive clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating positive clips for testing
+##################################################
+WARNING:root:Skipping generation of positive clips testing, as ~2000 already exist
+INFO:root:##################################################
+Generating negative clips for training
+##################################################
+WARNING:root:Skipping generation of negative clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating negative clips for testing
+##################################################
+WARNING:root:Skipping generation of negative clips for testing, as ~2000 already exist
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Computing openwakeword features for generated samples
+##################################################
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = PitchShift(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = BandStopFilter(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddColoredNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddBackgroundNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Gain(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/composition.py:42: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Compose(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/audiomentations/core/transforms_interface.py:61: UserWarning: Warning: input samples dtype is np.float64. Converting to np.float32
+  warnings.warn(
+Computing features: 100%|██████████████████▉| 3124/3125 [06:09<00:00,  8.45it/s]
+Trimming empty rows: 49it [00:00, 95.62it/s]                                    
+Computing features: 100%|██████████████████▉| 3124/3125 [06:14<00:00,  8.34it/s]
+Trimming empty rows: 49it [00:01, 31.68it/s]                                    
+Computing features:  99%|████████████████████▊| 124/125 [00:16<00:00,  7.63it/s]
+Trimming empty rows: 2it [00:00, 29.25it/s]                                     
+Computing features:  99%|████████████████████▊| 124/125 [00:15<00:00,  7.79it/s]
+Trimming empty rows: 2it [00:00, 33.18it/s]                                     
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Starting training sequence 1...
+##################################################
+Training: 100%|██████████████████████████▉| 39999/40000 [07:40<00:00, 86.94it/s]
+INFO:root:##################################################
+Starting training sequence 2...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 3999/4000.0 [03:38<00:00, 18.31it/s]
+INFO:root:##################################################
+Starting training sequence 3...
+##################################################
+INFO:root:Increasing weight on negative examples to reduce false positives...
+Training: 100%|██████████████████████████▉| 3999/4000.0 [03:21<00:00, 19.81it/s]
+INFO:root:Merging checkpoints above the 90th percentile into single model...
+INFO:root:
+################
+Final Model Accuracy: 0.6622499823570251
+Final Model Recall: 0.3244999945163727
+Final Model False Positives per Hour: 0.08849557489156723
+################
+
+INFO:root:####
+Saving ONNX mode as '/workspace/combs/final_result/Hey_Clãriss_n50000_s40000_w3000.onnx'
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1754256423.889181 2280571 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1754256423.896135 2280571 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1754256423.913329 2280571 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754256423.913357 2280571 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754256423.913361 2280571 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1754256423.913365 2280571 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+
+Model optimizing started ============================================================
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 14             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 200.6KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Simplifying...
+Finish! Here is the difference:
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━┓
+┃            ┃ Original Model ┃ Simplified Model ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━┩
+│ Add        │ 4              │ 4                │
+│ Constant   │ 12             │ 12               │
+│ Div        │ 2              │ 2                │
+│ Flatten    │ 1              │ 1                │
+│ Gemm       │ 3              │ 3                │
+│ Mul        │ 2              │ 2                │
+│ Pow        │ 2              │ 2                │
+│ ReduceMean │ 4              │ 4                │
+│ Relu       │ 2              │ 2                │
+│ Sigmoid    │ 1              │ 1                │
+│ Sqrt       │ 2              │ 2                │
+│ Sub        │ 2              │ 2                │
+│ Model Size │ 201.4KiB       │ 201.4KiB         │
+└────────────┴────────────────┴──────────────────┘
+
+Model optimizing complete!
+
+Automatic generation of each OP name started ========================================
+Automatic generation of each OP name complete!
+
+Model loaded ========================================================================
+
+Model conversion started ============================================================
+INFO: input_op_name: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+
+INFO: 2 / 26
+INFO: onnx_op_type: Flatten onnx_op_name: /flatten/Flatten
+INFO:  input_name.1: onnx____Flatten_0 shape: [1, 16, 96] dtype: float32
+INFO:  output_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO: tf_op_type: reshape
+INFO:  input.1.tensor: name: onnx____Flatten_0 shape: (1, 16, 96) dtype: <dtype: 'float32'> 
+INFO:  input.2.shape: val: [1, 1536] 
+INFO:  output.1.output: name: tf.reshape/Reshape:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+
+INFO: 3 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /layer1/Gemm
+INFO:  input_name.1: /flatten/Flatten_output_0 shape: [1, 1536] dtype: float32
+INFO:  input_name.2: layer1.weight shape: [32, 1536] dtype: float32
+INFO:  input_name.3: layer1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 1536) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1536, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 4 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 5 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /layernorm1/Sub
+INFO:  input_name.1: /layer1/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_1/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 6 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /layernorm1/Pow
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 7 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /layernorm1/ReduceMean_1
+INFO:  input_name.1: /layernorm1/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_4/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 8 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add
+INFO:  input_name.1: /layernorm1/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: [] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_3/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 9 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /layernorm1/Sqrt
+INFO:  input_name.1: /layernorm1/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_1/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 10 / 26
+INFO: onnx_op_type: Div onnx_op_name: /layernorm1/Div
+INFO:  input_name.1: /layernorm1/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 11 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /layernorm1/Mul
+INFO:  input_name.1: /layernorm1/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.weight shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 12 / 26
+INFO: onnx_op_type: Add onnx_op_name: /layernorm1/Add_1
+INFO:  input_name.1: /layernorm1/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: layernorm1.bias shape: [32] dtype: float32
+INFO:  output_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_10/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 13 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /relu1/Relu
+INFO:  input_name.1: /layernorm1/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_2/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 14 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /blocks.0/fcn_layer/Gemm
+INFO:  input_name.1: /relu1/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.fcn_layer.weight shape: [32, 32] dtype: float32
+INFO:  input_name.3: blocks.0.fcn_layer.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (32,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 15 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 16 / 26
+INFO: onnx_op_type: Sub onnx_op_name: /blocks.0/layer_norm/Sub
+INFO:  input_name.1: /blocks.0/fcn_layer/Gemm_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/ReduceMean_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: subtract
+INFO:  input.1.x: name: tf.__operators__.add_1/AddV2:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.reduce_mean_5/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 17 / 26
+INFO: onnx_op_type: Pow onnx_op_name: /blocks.0/layer_norm/Pow
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: pow
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 18 / 26
+INFO: onnx_op_type: ReduceMean onnx_op_name: /blocks.0/layer_norm/ReduceMean_1
+INFO:  input_name.1: /blocks.0/layer_norm/Pow_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: reduce_mean
+INFO:  input.1.axis0: val: 1 
+INFO:  input.2.input_tensor: name: tf.math.multiply_16/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.3.keepdims: val: True 
+INFO:  output.1.output: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 19 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add
+INFO:  input_name.1: /blocks.0/layer_norm/ReduceMean_1_output_0 shape: [1, 1] dtype: float32
+INFO:  input_name.2: /layernorm1/Constant_1_output_0 shape: () dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.reduce_mean_7/Mean:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: () dtype: float32 
+INFO:  output.1.output: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 20 / 26
+INFO: onnx_op_type: Sqrt onnx_op_name: /blocks.0/layer_norm/Sqrt
+INFO:  input_name.1: /blocks.0/layer_norm/Add_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sqrt
+INFO:  input.1.x: name: tf.math.add_4/Add:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 21 / 26
+INFO: onnx_op_type: Div onnx_op_name: /blocks.0/layer_norm/Div
+INFO:  input_name.1: /blocks.0/layer_norm/Sub_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: /blocks.0/layer_norm/Sqrt_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: divide
+INFO:  input.1.x: name: tf.math.subtract_1/Sub:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: name: tf.math.sqrt_1/Sqrt:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 22 / 26
+INFO: onnx_op_type: Mul onnx_op_name: /blocks.0/layer_norm/Mul
+INFO:  input_name.1: /blocks.0/layer_norm/Div_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.weight shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: multiply
+INFO:  input.1.x: name: tf.math.divide_1/truediv:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 23 / 26
+INFO: onnx_op_type: Add onnx_op_name: /blocks.0/layer_norm/Add_1
+INFO:  input_name.1: /blocks.0/layer_norm/Mul_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: blocks.0.layer_norm.bias shape: [32] dtype: float32
+INFO:  output_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: add
+INFO:  input.1.x: name: tf.math.multiply_22/Mul:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 24 / 26
+INFO: onnx_op_type: Relu onnx_op_name: /blocks.0/relu/Relu
+INFO:  input_name.1: /blocks.0/layer_norm/Add_1_output_0 shape: [1, 32] dtype: float32
+INFO:  output_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO: tf_op_type: relu
+INFO:  input.1.features: name: tf.math.add_5/Add:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.nn.relu_1/Relu:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+
+INFO: 25 / 26
+INFO: onnx_op_type: Gemm onnx_op_name: /last_layer/Gemm
+INFO:  input_name.1: /blocks.0/relu/Relu_output_0 shape: [1, 32] dtype: float32
+INFO:  input_name.2: last_layer.weight shape: [1, 32] dtype: float32
+INFO:  input_name.3: last_layer.bias shape: [1] dtype: float32
+INFO:  output_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO: tf_op_type: matmul
+INFO:  input.1.x: name: Placeholder:0 shape: (1, 32) dtype: <dtype: 'float32'> 
+INFO:  input.2.y: shape: (32, 1) dtype: <dtype: 'float32'> 
+INFO:  input.3.z: shape: (1,) dtype: <dtype: 'float32'> 
+INFO:  input.4.alpha: val: 1.0 
+INFO:  input.5.beta: val: 1.0 
+INFO:  output.1.output: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+INFO: 26 / 26
+INFO: onnx_op_type: Sigmoid onnx_op_name: /last_act/Sigmoid
+INFO:  input_name.1: /last_layer/Gemm_output_0 shape: [1, 1] dtype: float32
+INFO:  output_name.1: 39 shape: [1, 1] dtype: float32
+INFO: tf_op_type: sigmoid
+INFO:  input.1.x: name: tf.__operators__.add_2/AddV2:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+INFO:  output.1.output: name: tf.math.sigmoid/Sigmoid:0 shape: (1, 1) dtype: <dtype: 'float32'> 
+
+saved_model output started ==========================================================
+Saved artifact at 'final_result/'. The following endpoints are available:
+
+* Endpoint 'serving_default'
+  inputs_0 (POSITIONAL_ONLY): TensorSpec(shape=(1, 16, 96), dtype=tf.float32, name='onnx____Flatten_0')
+Output Type:
+  TensorSpec(shape=(1, 1), dtype=tf.float32, name=None)
+Captures:
+  130522138527888: TensorSpec(shape=(1536, 32), dtype=tf.float32, name=None)
+  130522138528272: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  130522138529616: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  130522138528080: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  130522138532496: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  130522138530960: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  130522138530000: TensorSpec(shape=(32, 32), dtype=tf.float32, name=None)
+  130522138530576: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  130522138530384: TensorSpec(shape=(32,), dtype=tf.float32, name=None)
+  130522138533072: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  130522138532112: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  130522138530768: TensorSpec(shape=(1, 32), dtype=tf.float32, name=None)
+  130522138531728: TensorSpec(shape=(32, 1), dtype=tf.float32, name=None)
+  130522138530192: TensorSpec(shape=(), dtype=tf.float32, name=None)
+  130522138529808: TensorSpec(shape=(1,), dtype=tf.float32, name=None)
+saved_model output complete!
+I0000 00:00:1754256428.523941 2280571 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1754256428.524367 2280571 single_machine.cc:374] Starting new session
+W0000 00:00:1754256428.674896 2280571 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754256428.674945 2280571 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float32 tflite output complete!
+I0000 00:00:1754256428.738002 2280571 devices.cc:67] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+I0000 00:00:1754256428.738343 2280571 single_machine.cc:374] Starting new session
+W0000 00:00:1754256428.910646 2280571 tf_tfl_flatbuffer_helpers.cc:365] Ignored output_format.
+W0000 00:00:1754256428.910696 2280571 tf_tfl_flatbuffer_helpers.cc:368] Ignored drop_control_dependency.
+Float16 tflite output complete!
+
+=== Training combination 4/4 ===
+N_samples: 50000, Steps: 50000, Max_negative_weight: 3000
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+✓ pt_PT-tugão-medium.onnx already exists, skipping download
+✓ pt_PT-tugão-medium.onnx.json already exists, skipping download
+Ensuring voice exists: pt_PT-tugão-medium
+✓ Voice 'pt_PT-tugão-medium' is ready.
+Ensuring voice exists: es_MX-claude-high
+✓ Voice 'es_MX-claude-high' is ready.
+Ensuring voice exists: pt_BR-cadu-medium
+✓ Voice 'pt_BR-cadu-medium' is ready.
+Ensuring voice exists: pt_BR-faber-medium
+✓ Voice 'pt_BR-faber-medium' is ready.
+Ensuring voice exists: pt_PT-rita
+✗ Voice 'pt_PT-rita' not found in voices.json. Checking local models...
+✓ Found local model: models/pt_PT-rita.onnx
+✓ Successfully loaded local model 'pt_PT-rita'
+✅ Loaded 5 voice(s)
+  0: pt
+  1: es-419
+  2: pt-br
+  3: pt-br
+  4: pt
+INFO:root:##################################################
+Generating positive clips for training
+##################################################
+WARNING:root:Skipping generation of positive clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating positive clips for testing
+##################################################
+WARNING:root:Skipping generation of positive clips testing, as ~2000 already exist
+INFO:root:##################################################
+Generating negative clips for training
+##################################################
+WARNING:root:Skipping generation of negative clips for training, as ~50000 already exist
+INFO:root:##################################################
+Generating negative clips for testing
+##################################################
+WARNING:root:Skipping generation of negative clips for testing, as ~2000 already exist
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Computing openwakeword features for generated samples
+##################################################
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = PitchShift(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = BandStopFilter(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddColoredNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = AddBackgroundNoise(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/transforms_interface.py:77: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Gain(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/core/composition.py:42: FutureWarning: Transforms now expect an `output_type` argument that currently defaults to 'tensor', will default to 'dict' in v0.12, and will be removed in v0.13. Make sure to update your code to something like:
+  >>> augment = Compose(..., output_type='dict')
+  >>> augmented_samples = augment(samples).samples
+  warnings.warn(
+/opt/conda/lib/python3.11/site-packages/audiomentations/core/transforms_interface.py:61: UserWarning: Warning: input samples dtype is np.float64. Converting to np.float32
+  warnings.warn(
+Computing features: 100%|██████████████████▉| 3124/3125 [06:08<00:00,  8.48it/s]
+Trimming empty rows: 49it [00:00, 93.71it/s]                                    
+Computing features: 100%|██████████████████▉| 3124/3125 [06:28<00:00,  8.04it/s]
+Trimming empty rows: 49it [00:01, 32.65it/s]                                    
+Computing features:  99%|████████████████████▊| 124/125 [00:17<00:00,  7.26it/s]
+Trimming empty rows: 2it [00:00, 33.29it/s]                                     
+Computing features:  99%|████████████████████▊| 124/125 [00:14<00:00,  8.32it/s]
+Trimming empty rows: 2it [00:00, 35.22it/s]                                     
+/opt/conda/lib/python3.11/site-packages/torch_audiomentations/utils/io.py:27: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+INFO:root:##################################################
+Starting training sequence 1...
+##################################################
+Training:  87%|███████████████████████▌   | 43539/50000 [06:47<02:28, 43.45it/s]
